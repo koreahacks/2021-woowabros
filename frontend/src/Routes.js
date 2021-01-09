@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
@@ -9,6 +9,7 @@ import PostPage from "./pages/Post";
 import QuestionPage from "./pages/Question";
 import RankingPage from "./pages/Ranking";
 import UserPostPage from "./pages/UserPost";
+import NavigationBar from "./components/navbar/NavigationBar";
 
 const routes = [
   {
@@ -62,14 +63,17 @@ const routes = [
 ];
 
 const SwitchRoutes = () => {
-  const loginToken = localStorage.getItem("loginToken");
+  const location = useLocation();
+  const loginToken = localStorage.getItem("token");
   return (
     <>
       <Switch>
         {routes.map(({ path, page, exact }, key) => (
           <Route path={path} key={key} component={page} exact={exact} />
         ))}
+        <Route component={NavigationBar} />
       </Switch>
+      {location.pathname !== "/sign-in" && <NavigationBar />}
       {loginToken === "" ? <Redirect to="/sign-in" /> : <></>}
     </>
   );

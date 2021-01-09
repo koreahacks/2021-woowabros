@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AppWrapper = styled.div`
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.5rem 3.625rem 0.5rem;
 `;
 
 export const SharedPurpleWrapper = styled.div`
