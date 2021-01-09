@@ -5,6 +5,7 @@ import Chart from "../components/user/Chart";
 import PostSummary from "../components/user/PostSummary";
 import UserSummary from "../components/user/UserSummary";
 import { AppWrapper } from "../util/SharedStyles";
+import DropButton from "../components/user/DropButton";
 
 const User = () => {
   const [userSummary, setUserSummary] = useState({
@@ -74,6 +75,8 @@ const User = () => {
     },
   ]);
 
+  const tryDrop = () => {};
+
   return (
     <AppWrapper>
       <Head />
@@ -89,6 +92,7 @@ const User = () => {
       />
       <PostSummary data={{ title: "내가 올린 질문", summary: userPost }} />
       <PostSummary data={{ title: "내가 올린 답변", summary: userAnswer }} />
+      <DropButton functions={{ tryDrop: tryDrop }} />
     </AppWrapper>
   );
 };

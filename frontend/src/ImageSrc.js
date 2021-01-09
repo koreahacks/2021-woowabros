@@ -1,26 +1,45 @@
-const { PUBLIC_URL } = process.env;
+import ANONYMOUS from "./assets/anonymous.svg";
+import BACK from "./assets/back.svg";
+import CHECKBOX_FILL from "./assets/checkbox_fill.svg";
+import CHECKBOX from "./assets/checkbox.svg";
+import IMAGE from "./assets/image.svg";
+import NAMED from "./assets/named.svg";
+import THUMBS_DOWN_FILL from "./assets/thumbs_down_fill.svg";
+import THUMBS_DOWN from "./assets/thumbs_down.svg";
+import THUMBS_UP_FILL from "./assets/thumbs_up_fill.svg";
+import THUMBS_UP from "./assets/thumbs_up.svg";
+import UNICORN from "./assets/unicorn.svg";
+import HOME from "./assets/home.svg";
+import HOME_FILL from "./assets/home_fill.svg";
+import ACCOUNT from "./assets/account.svg";
+import ACCOUNT_FILL from "./assets/account_fill.svg";
+import VERIFIED from "./assets/verified.svg";
+import VERIFIED_FILL from "./assets/verified_fill.svg";
+import HELP from "./assets/help.svg";
+import HELP_FILL from "./assets/help_fill.svg";
+import SEARCH_ICON from "./assets//search_icon.svg";
 
 const ImageSrc = {
-  ANONYMOUS: PUBLIC_URL + "anonymous.svg",
-  BACK: PUBLIC_URL + "/back.svg",
-  CHECKBOX_FILL: PUBLIC_URL + "checkbox_fill.svg",
-  CHECKBOX: PUBLIC_URL + "checkbox.svg",
-  IMAGE: PUBLIC_URL + "image.svg",
-  NAMED: PUBLIC_URL + "named.svg",
-  THUMBS_DOWN_FILL: PUBLIC_URL + "thumbs_down_fill.svg",
-  THUMBS_DOWN: PUBLIC_URL + "thumbs_down.svg",
-  THUMBS_UP_FILL: PUBLIC_URL + "thumbs_up_fill.svg",
-  THUMBS_UP: PUBLIC_URL + "thumbs_up.svg",
-  UNICORN: PUBLIC_URL + "unicorn.svg",
-  HOME: PUBLIC_URL + "home.svg",
-  HOME_FILL: PUBLIC_URL + "home_fill.svg",
-  ACCOUNT: PUBLIC_URL + "account.svg",
-  ACCOUNT_FILL: PUBLIC_URL + "account_fill.svg",
-  VERIFIED: PUBLIC_URL + "verified.svg",
-  VERIFIED_FILL: PUBLIC_URL + "verified_fill.svg",
-  HELP: PUBLIC_URL + "help.svg",
-  HELP_FILL: PUBLIC_URL + "help_fill.svg",
-  SEARCH_ICON: PUBLIC_URL + "/search_icon.svg",
+  ANONYMOUS,
+  BACK,
+  CHECKBOX_FILL,
+  CHECKBOX,
+  IMAGE,
+  NAMED,
+  THUMBS_DOWN_FILL,
+  THUMBS_DOWN,
+  THUMBS_UP_FILL,
+  THUMBS_UP,
+  UNICORN,
+  HOME,
+  HOME_FILL,
+  ACCOUNT,
+  ACCOUNT_FILL,
+  VERIFIED,
+  VERIFIED_FILL,
+  HELP,
+  HELP_FILL,
+  SEARCH_ICON,
 };
 
 export default ImageSrc;
