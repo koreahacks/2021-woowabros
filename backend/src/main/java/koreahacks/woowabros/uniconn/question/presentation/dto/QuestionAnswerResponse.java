@@ -33,14 +33,13 @@ public class QuestionAnswerResponse {
     private List<AnswerResponse> answers;
 
     public static QuestionAnswerResponse of(Question question, List<Answer> answers) {
-
-
         return QuestionAnswerResponse.builder()
                 .id(question.getId())
                 .title(question.getTitle())
                 .content(question.getContent())
                 .price(question.getPrice())
                 .createdAt(question.getCreatedAt())
+                .selectedCommentId(answers.stream().filter(Answer::isSelected).findFirst().orElse(Answer.builder().build()).getId())
                 .answers(answers.stream().map(AnswerResponse::of).collect(toList()))
                 .build();
     }

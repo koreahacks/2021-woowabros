@@ -1,22 +1,22 @@
 package koreahacks.woowabros.uniconn.member.application;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
+import koreahacks.woowabros.uniconn.member.domain.Member;
+import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import koreahacks.woowabros.uniconn.member.domain.Member;
-import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
-import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 @SpringBootTest
 class MemberServiceTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @BeforeEach
+    void setUp() {
+        memberRepository.deleteAll().block();
+    }
 
     @Test
     void getAndSave() {
