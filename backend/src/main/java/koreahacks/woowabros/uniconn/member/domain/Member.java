@@ -3,6 +3,7 @@ package koreahacks.woowabros.uniconn.member.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import koreahacks.woowabros.uniconn.exception.AlreadyVerifiedException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,4 +28,13 @@ public class Member {
     private String univ;
 
     private String major;
+
+    private String authCode;
+
+    public void verify() {
+        if (isVerified) {
+            throw new AlreadyVerifiedException();
+        }
+        this.isVerified = true;
+    }
 }

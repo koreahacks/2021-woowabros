@@ -1,0 +1,20 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: uniconn2021@gmail.com
+    password: anfro123!@
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+logging:
+  level:
+    org:
+      elasticsearch:
+        index:
+          search:
+            slowlog:
+              query: INFO
