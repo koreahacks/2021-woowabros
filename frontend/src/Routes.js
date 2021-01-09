@@ -64,7 +64,7 @@ const routes = [
 
 const SwitchRoutes = () => {
   const location = useLocation();
-  const loginToken = localStorage.getItem("token");
+  const loginToken = localStorage.getItem("loginToken");
   return (
     <>
       <Switch>

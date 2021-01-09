@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Title from "../components/login/Title";
 import LoginInputs from "../components/login/LoginInputs";
 import ImageSrc from "../ImageSrc";
-import { loginTokenState } from "../store";
+import { authState } from "../store";
 import UserHelp from "../components/login/UserHelp";
 
 const LoginContent = styled.div`
@@ -51,11 +51,11 @@ const Login = () => {
     setRemember(!remember);
   };
 
-  const setLoginToken = useSetRecoilState(loginTokenState);
+  const setAuth = useSetRecoilState(authState);
   const history = useHistory();
   const handleButtonClick = () => {
     // TODO: link with api
-    setLoginToken("hiImGroot");
+    setAuth({ loginToken: "hiImGroot", userId: 1 });
     localStorage.setItem("loginToken", "loginToken");
     if (remember) {
       localStorage.setItem("email", email);

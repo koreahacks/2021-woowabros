@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { authState } from "../../store";
 
 const clickedColor = "#800000";
 const unclickedColor = "red";
@@ -40,6 +42,14 @@ const TabName = styled.div`
 `;
 
 const Tab = ({ data, functions }) => {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    setUserId(authState.userId);
+  }, [authState.userId]);
+
+  console.log(userId);
+
   return (
     <TabWrapper to={data.url}>
       <TabContent>
