@@ -1,11 +1,8 @@
 package koreahacks.woowabros.uniconn.member.application;
 
-<<<<<<< HEAD
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
-=======
->>>>>>> feat: Authorization WebFilter & ArgumentResolver
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

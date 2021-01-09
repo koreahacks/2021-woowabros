@@ -1,7 +1,10 @@
-package koreahacks.woowabros.uniconn;
+package koreahacks.woowabros.uniconn.member.domain;
 
 import java.util.Arrays;
 
+import lombok.Getter;
+
+@Getter
 public enum University {
     KARTS("한국예술종합학교", "karts.ac.kr"),
     KCC("순복음총회신학교", "kcc.ac.kr"),
@@ -210,7 +213,7 @@ public enum University {
 
     public static University from(String email) {
         return Arrays.stream(University.values())
-                .filter(university -> university.email.equals(email))
+                .filter(university -> email.endsWith(university.email))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 대학을 찾을 수 없습니다."));
     }
