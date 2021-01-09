@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +35,12 @@ public class MemberController {
     }
 
     @GetMapping("/auth/{authCode}")
-    public Mono<Member> auth(@PathVariable String authCode) {
-        return memberService.authorize(authCode);
+    public ServerHttpResponse auth(@PathVariable String authCode, ServerHttpResponse response) {
+        memberService.authorize(authCode);
+        response.setStatusCode(HttpStatus.PERMANENT_REDIRECT);
+        response.getHeaders().setLocation(URI.create("/"));
+
+        return response;
     }
 
     @GetMapping("/{id}")
@@ -43,4 +48,8 @@ public class MemberController {
         return memberService.findById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable String id) {
+        return memberService.deleteById(id);
+    }
 }
