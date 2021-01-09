@@ -10,7 +10,7 @@ public class QuestionCreateRequest {
 
     private String content;
 
-    private boolean isPayment;
+    private long price;
 
     private String category;
 
@@ -18,7 +18,7 @@ public class QuestionCreateRequest {
         return Question.builder()
                 .title(title)
                 .content(content)
-                .price(0L)
+                .price(price)
                 .category(category)
                 .build();
     }
