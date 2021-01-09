@@ -1,0 +1,39 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: uniconn2021@gmail.com
+    password: anfro123!@
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+logging:
+  level:
+    org:
+      elasticsearch:
+        index:
+          search:
+            slowlog:
+              query: INFO
+secrets:
+  jwt:
+    token:
+      secret-key: secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret
+      expire-length: 2147483646
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: 13.125.198.186:9200
+  elasticsearch:
+    rest:
+      uris: http://13.125.198.186:9200
