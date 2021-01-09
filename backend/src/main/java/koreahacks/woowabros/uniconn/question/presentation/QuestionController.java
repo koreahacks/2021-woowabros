@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@Controller
+@RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
 

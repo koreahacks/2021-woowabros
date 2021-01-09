@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.server.RenderingResponse;
-import org.springframework.web.reactive.function.server.ServerResponse;
 
 import koreahacks.woowabros.uniconn.common.LoginMember;
 import koreahacks.woowabros.uniconn.member.application.MemberService;
 import koreahacks.woowabros.uniconn.member.domain.Member;
+import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,9 +29,19 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping
+    @PostMapping("/join")
     public Mono<String> create(@Valid @RequestBody MemberCreateRequest request) {
         return memberService.create(request);
+    }
+
+    @PostMapping("/login")
+    public Mono<AccessToken> getToken(@RequestBody LoginRequest loginRequest) {
+        return memberService.login(loginRequest);
+    }
+
+    @GetMapping("/all")
+    public Flux<Member> getMember() {
+        return memberService.findAll();
     }
 
     @GetMapping("/auth/{authCode}")
@@ -44,9 +53,9 @@ public class MemberController {
         return response;
     }
 
-    @PostMapping("/login")
-    public Mono<AccessToken> getToken(@RequestBody LoginRequest loginRequest) {
-        return memberService.login(loginRequest);
+    @GetMapping("/info")
+    public Mono<MemberInfoResponse> retrieveLoginMember(@LoginMember Member member) {
+        return memberService.findMemberInfo(member);
     }
 
     @GetMapping("/{id}")
@@ -54,14 +63,15 @@ public class MemberController {
         return memberService.findById(id);
     }
 
-    // @DeleteMapping("/{id}")
-    // public Mono<Void> delete(@PathVariable String id) {
-    //     return memberService.deleteById(id);
-    // }
 
     @DeleteMapping
     public Mono<Void> delete(@LoginMember Member loginMember) {
         System.out.println(loginMember);
         return Mono.empty();
+    }
+
+    @GetMapping
+    public Mono<Member> retrieveSelf(@LoginMember Member loginMember) {
+        return Mono.just(loginMember);
     }
 }

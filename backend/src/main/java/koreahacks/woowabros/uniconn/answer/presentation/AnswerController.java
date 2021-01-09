@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/answers")
 public class AnswerController {
 
