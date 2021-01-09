@@ -6,6 +6,7 @@ import Title from "../components/login/Title";
 import LoginInputs from "../components/login/LoginInputs";
 import ImageSrc from "../ImageSrc";
 import { loginTokenState } from "../store";
+import UserHelp from "../components/login/UserHelp";
 
 const LoginContent = styled.div`
   width: 100%;
@@ -53,7 +54,8 @@ const Login = () => {
   const [loginToken, setLoginToken] = useRecoilState(loginTokenState);
   const history = useHistory();
   const handleButtonClick = () => {
-    setLoginToken("안뇽");
+    // TODO: link with api
+    setLoginToken("hiImGroot");
     localStorage.setItem("loginToken", loginToken);
     if (remember) {
       localStorage.setItem("email", email);
@@ -79,6 +81,7 @@ const Login = () => {
           handleRememberClick={handleRememberClick}
           handleButtonClick={handleButtonClick}
         />
+        <UserHelp />
       </LoginWrapper>
     </LoginContent>
   );
