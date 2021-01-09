@@ -37,4 +37,8 @@ public class Member {
         }
         this.isVerified = true;
     }
+
+    public boolean isPasswordMatch(String password) {
+        return this.password.equals(password);
+    }
 }

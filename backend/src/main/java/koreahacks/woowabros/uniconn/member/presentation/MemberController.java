@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.server.RenderingResponse;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import koreahacks.woowabros.uniconn.common.LoginMember;
 import koreahacks.woowabros.uniconn.member.application.MemberService;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/")
+    @PostMapping
     public Mono<String> create(@Valid @RequestBody MemberCreateRequest request) {
         return memberService.create(request);
     }
@@ -43,13 +44,24 @@ public class MemberController {
         return response;
     }
 
+    @PostMapping("/login")
+    public Mono<AccessToken> getToken(@RequestBody LoginRequest loginRequest) {
+        return memberService.login(loginRequest);
+    }
+
     @GetMapping("/{id}")
     public Mono<Member> retrieve(@PathVariable String id) {
         return memberService.findById(id);
     }
 
-    @DeleteMapping("/{id}")
-    public Mono<Void> delete(@PathVariable String id) {
-        return memberService.deleteById(id);
+    // @DeleteMapping("/{id}")
+    // public Mono<Void> delete(@PathVariable String id) {
+    //     return memberService.deleteById(id);
+    // }
+
+    @DeleteMapping
+    public Mono<Void> delete(@LoginMember Member loginMember) {
+        System.out.println(loginMember);
+        return Mono.empty();
     }
 }
