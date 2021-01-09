@@ -12,11 +12,11 @@ const HeadWrapper = styled.div`
   height: 1.625rem;
 `;
 
-const Head = ({ type }) => {
+const Head = ({ text }) => {
   return (
     <>
       <HeadWrapper>
-        <BackButton type={type} />
+        <BackButton text={text} />
       </HeadWrapper>
     </>
   );

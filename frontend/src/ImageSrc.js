@@ -19,6 +19,7 @@ import HELP from "./assets/help.svg";
 import HELP_FILL from "./assets/help_fill.svg";
 import SEARCH_ICON from "./assets//search_icon.svg";
 import NEW from "./assets/new.svg";
+import CANCEL from "./assets/cancel.svg";
 
 const ImageSrc = {
   ANONYMOUS,
@@ -41,7 +42,8 @@ const ImageSrc = {
   HELP,
   HELP_FILL,
   SEARCH_ICON,
-  NEW
+  NEW,
+  CANCEL,
 };
 
 export default ImageSrc;
