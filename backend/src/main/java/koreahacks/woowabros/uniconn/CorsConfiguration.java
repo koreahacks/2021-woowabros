@@ -10,8 +10,7 @@ public class CorsConfiguration implements WebFluxConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:8080")
-                .allowedOrigins("https://uniconn.me")
+                .allowedOrigins("*")
                 .maxAge(3600);
     }
 }
