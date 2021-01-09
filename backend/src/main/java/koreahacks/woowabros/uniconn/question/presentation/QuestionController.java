@@ -5,7 +5,11 @@ import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.question.application.QuestionService;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionCreateRequest;
+import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionWithSelectedResponse;
+
+import org.elasticsearch.action.search.SearchResponse;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -38,5 +42,10 @@ public class QuestionController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         questionService.delete(id);
+    }
+
+    @GetMapping("/search")
+    public Flux<QuestionResponse> search(@RequestParam String query) {
+        return questionService.search(query);
     }
 }
