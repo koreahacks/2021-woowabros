@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import { SharedPurpleWrapper } from "../../util/SharedStyles";
+import RadarChart from "../../util/Chart";
 
 const UserSummaryWrapper = styled(SharedPurpleWrapper)`
   justify-content: space-between;
 `;
 
-const ChartWrapper = styled.div`
+const Chart = styled(RadarChart)`
   width: 8rem;
   height: 8rem;
   background-color: #fff;
@@ -42,9 +43,22 @@ const ShowMyInfo = styled(Percentile)`
 
 const UserSummary = ({ data, functions }) => {
   const { userSummary } = data;
+
   return (
     <UserSummaryWrapper>
-      <ChartWrapper />
+      <Chart
+        data={{
+          size: 128,
+          data: data.chart.data,
+          captions: data.chart.captions,
+          options: {
+            captionProps: () => ({
+              textAnchor: "middle",
+              fontSize: 1,
+            }),
+          },
+        }}
+      />
       <UserInfoWrapper>
         <Univ>{userSummary.school}</Univ>
         <Major>{userSummary.major}</Major>
