@@ -27,4 +27,6 @@ public class Member {
     private String univ;
 
     private String major;
+
+    private String authCode;
 }
