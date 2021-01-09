@@ -33,7 +33,7 @@ const LoginWrapper = styled.div`
 
 const Login = () => {
   const [inputs, setInputs] = useState({
-    email: "",
+    email: localStorage.getItem("email") ? localStorage.getItem("email") : "",
     password: "",
   });
   const { email, password } = inputs;
@@ -44,15 +44,23 @@ const Login = () => {
       [name]: value,
     });
   };
+
   const [remember, setRemember] = useState(false);
   const handleRememberClick = () => {
     setRemember(!remember);
   };
+
   const [loginToken, setLoginToken] = useRecoilState(loginTokenState);
   const history = useHistory();
   const handleButtonClick = () => {
     setLoginToken("안뇽");
     localStorage.setItem("loginToken", loginToken);
+    if (remember) {
+      localStorage.setItem("email", email);
+    }
+    if (!remember) {
+      localStorage.setItem("email", "");
+    }
     history.push("/");
   };
 
