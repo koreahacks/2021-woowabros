@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionResponse;
@@ -28,7 +29,7 @@ public class MemberInfoResponse {
 
     private String univ;
 
-    private String major;
+    private Major major;
 
     private String authCode;
 

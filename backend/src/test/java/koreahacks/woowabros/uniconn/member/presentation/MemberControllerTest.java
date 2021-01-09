@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
@@ -34,7 +35,7 @@ class MemberControllerTest {
     @Test
     void create() {
         MemberCreateRequest request = new MemberCreateRequest("abc@korea.ac.kr", "12345678", "dd",
-            "Computer Science");
+            Major.COMPUTER_SCIENCE);
 
         webTestClient.post()
             .uri("/api/members/join")

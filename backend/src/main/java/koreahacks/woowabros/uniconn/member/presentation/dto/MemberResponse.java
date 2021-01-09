@@ -1,5 +1,6 @@
 package koreahacks.woowabros.uniconn.member.presentation.dto;
 
+import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +20,7 @@ public class MemberResponse {
 
     private String univ;
 
-    private String major;
+    private Major major;
 
     public static MemberResponse of(Member member) {
         return MemberResponse.builder()

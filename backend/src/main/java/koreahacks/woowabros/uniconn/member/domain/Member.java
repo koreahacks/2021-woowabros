@@ -29,7 +29,7 @@ public class Member {
 
     private String univ;
 
-    private String major;
+    private Major major;
 
     private String authCode;
 

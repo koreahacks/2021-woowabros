@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 import koreahacks.woowabros.uniconn.common.AuthCodeGenerator;
+import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.University;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class MemberCreateRequest {
     private String nickname;
 
     @NotBlank
-    private String major;
+    private Major major;
 
     public Member toMember(AuthCodeGenerator generator) {
         return Member.builder()

@@ -1,15 +1,13 @@
 package koreahacks.woowabros.uniconn.member.application;
 
-import koreahacks.woowabros.uniconn.member.domain.Member;
-import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import koreahacks.woowabros.uniconn.member.presentation.dto.AccessToken;
-import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
-import reactor.test.StepVerifier;
+import koreahacks.woowabros.uniconn.member.domain.Major;
+import koreahacks.woowabros.uniconn.member.domain.Member;
+import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 
 @SpringBootTest
 class MemberServiceTest {
@@ -38,5 +36,13 @@ class MemberServiceTest {
         System.out.println(memberRepository.findFirstByAuthCode(member.getAuthCode())
             .map(Member::isVerified)
             .block());
+    }
+
+    @Test
+    void save() {
+        memberRepository.save(Member.builder()
+            .major(Major.COMPUTER_SCIENCE)
+            .build())
+            .block();
     }
 }
