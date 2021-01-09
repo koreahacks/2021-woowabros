@@ -1,15 +1,14 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import UserPage from "./pages/User";
 import PostPage from "./pages/Post";
+import QuestionPage from "./pages/Question";
 import RankingPage from "./pages/Ranking";
 import UserPostPage from "./pages/UserPost";
-import { loginTokenState } from "./store";
 
 const routes = [
   {
@@ -48,7 +47,12 @@ const routes = [
     exact: true,
     name: "게시판",
   },
-
+  {
+    path: "/posts/:type/:id",
+    page: QuestionPage,
+    exact: true,
+    name: "게시글 상세",
+  },
   {
     path: "/ranking?type=:type",
     page: RankingPage,
@@ -58,7 +62,7 @@ const routes = [
 ];
 
 const SwitchRoutes = () => {
-  const loginToken = useRecoilValue(loginTokenState);
+  const loginToken = localStorage.getItem("loginToken");
   return (
     <>
       <Switch>

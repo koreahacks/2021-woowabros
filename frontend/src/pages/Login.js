@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import Title from "../components/login/Title";
 import LoginInputs from "../components/login/LoginInputs";
@@ -51,12 +51,12 @@ const Login = () => {
     setRemember(!remember);
   };
 
-  const [loginToken, setLoginToken] = useRecoilState(loginTokenState);
+  const setLoginToken = useSetRecoilState(loginTokenState);
   const history = useHistory();
   const handleButtonClick = () => {
     // TODO: link with api
     setLoginToken("hiImGroot");
-    localStorage.setItem("loginToken", loginToken);
+    localStorage.setItem("loginToken", "loginToken");
     if (remember) {
       localStorage.setItem("email", email);
     }
