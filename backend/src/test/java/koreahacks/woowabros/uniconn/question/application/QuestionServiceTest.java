@@ -8,12 +8,13 @@ import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResp
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -70,5 +71,31 @@ class QuestionServiceTest {
                         () -> assertThat(it.getAnswers()).hasSize(3),
                         () -> assertThat(it.getSelectedCommentId()).isNull()
                 )).verifyComplete();
+    }
+
+    @Test
+    void findAll() {
+        List<String> ids = questionRepository.saveAll(Arrays.asList(
+                Question.builder().userId("dd").build(),
+                Question.builder().userId("dd").build(),
+                Question.builder().userId("dd").build()
+        )).collectList()
+                .block()
+                .stream()
+                .map(Question::getId)
+                .collect(Collectors.toList());
+        answerRepository.saveAll(Arrays.asList(
+                Answer.builder().questionId(ids.get(0)).build(),
+                Answer.builder().questionId(ids.get(0)).build(),
+                Answer.builder().questionId(ids.get(1)).isSelected(true).build(),
+                Answer.builder().questionId(ids.get(1)).build(),
+                Answer.builder().questionId(ids.get(2)).build()
+        )).blockFirst();
+
+        StepVerifier.create(questionService.findAll())
+                .consumeNextWith(questionResponse -> assertThat(questionResponse.isSelected()).isFalse())
+                .consumeNextWith(questionResponse -> assertThat(questionResponse.isSelected()).isTrue())
+                .consumeNextWith(questionResponse -> assertThat(questionResponse.isSelected()).isFalse())
+                .verifyComplete();
     }
 }
