@@ -10,9 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
-import reactor.core.publisher.Mono;
 
 @SpringBootTest
 class MemberControllerTest {
@@ -20,10 +20,11 @@ class MemberControllerTest {
     private WebTestClient webTestClient;
 
     @Autowired
-    private MemberController memberController;
+    private MemberRepository memberRepository;
 
     @BeforeEach
     void setUp() {
+        memberRepository.deleteAll().block();
         webTestClient = WebTestClient.bindToServer()
             .baseUrl("http://localhost:8080")
             .build();
@@ -48,7 +49,7 @@ class MemberControllerTest {
     @DisplayName("로그인")
     @Test
     void login() {
-        LoginRequest request = new LoginRequest("abc@korea.ac.kr", "12345678");
+        LoginRequest request = new LoginRequest("fucct@sogang.ac.kr", "12345678");
 
         webTestClient.post()
             .uri("/api/members/login")
