@@ -14,12 +14,15 @@ public class QuestionCreateRequest {
 
     private String category;
 
+    private String userId;
+
     public Question toEntity() {
         return Question.builder()
                 .title(title)
                 .content(content)
                 .price(price)
                 .category(category)
+                .userId(userId)
                 .build();
     }
 }

@@ -21,7 +21,9 @@ public class JwtAuthFilter implements WebFilter {
 
     static {
         EXCLUDED_PATH = new ArrayList<>();
-        EXCLUDED_PATH.add("/api/members/");
+        EXCLUDED_PATH.add("/api/members/join");
+        EXCLUDED_PATH.add("/api/members/login");
+        EXCLUDED_PATH.add("/api/members/auth");
     }
 
     @Override
@@ -48,6 +50,6 @@ public class JwtAuthFilter implements WebFilter {
     }
 
     public boolean isExcludedPath(String path) {
-        return EXCLUDED_PATH.stream().anyMatch(path::contains);
+        return EXCLUDED_PATH.stream().anyMatch(path::contains) || path.equals("/") || path.equals("/index");
     }
 }

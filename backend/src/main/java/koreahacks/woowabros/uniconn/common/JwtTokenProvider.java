@@ -10,7 +10,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import koreahacks.woowabros.uniconn.member.presentation.AccessToken;
+import koreahacks.woowabros.uniconn.member.presentation.dto.AccessToken;
 
 @Component
 public class JwtTokenProvider implements TokenProvider{

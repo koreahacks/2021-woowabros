@@ -1,4 +1,4 @@
-package koreahacks.woowabros.uniconn.member.presentation;
+package koreahacks.woowabros.uniconn.member.presentation.dto;
 
 import java.util.UUID;
 
@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
+import koreahacks.woowabros.uniconn.common.AuthCodeGenerator;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.University;
 import lombok.AllArgsConstructor;
@@ -19,25 +20,25 @@ public class MemberCreateRequest {
     @Email
     private String email;
 
-    @NotBlank
     @Length(min = 8, max = 16)
     private String password;
+
+    @Length(min = 1, max = 20)
+    private String nickname;
 
     @NotBlank
     private String major;
 
-    public Member toMember() {
+    public Member toMember(AuthCodeGenerator generator) {
         return Member.builder()
             .email(this.email)
+            .nickname(this.nickname)
             .password(this.password)
             .major(this.major)
             .isVerified(false)
-            .authCode(createAuthorizationCode())
-            .univ(University.valueOf(this.email).name())
+            .authCode(generator.generate())
+            .univ(University.from(this.email).name())
             .build();
     }
 
-    private String createAuthorizationCode() {
-        return UUID.randomUUID().toString().replaceAll("-","").substring(0, 20);
-    }
 }

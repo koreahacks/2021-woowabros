@@ -1,0 +1,4 @@
+[submodule "infra/letsencrypt"]
+	path = infra/letsencrypt
+	url = https://github.com/kimhodol/koreahacks-letencrypt.git
+	branch = master

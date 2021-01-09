@@ -1,13 +1,46 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: "BMJUA";
+  src: url(./fonts/BMJUA.ttf) format("truetype");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  font-size: 5vw;
+  font-family: BMJUA;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: BMJUA;
+}
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/*placeholder font-family*/
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-family: BMJUA;
+  padding-left: 0.5rem;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-family: BMJUA;
+  padding-left: 0.5rem;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  font-family: BMJUA;
+  padding-left: 0.5rem;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  font-family: BMJUA;
+  padding-left: 0.5rem;
 }

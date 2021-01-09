@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import koreahacks.woowabros.uniconn.member.presentation.AccessToken;
-import koreahacks.woowabros.uniconn.member.presentation.LoginRequest;
+import koreahacks.woowabros.uniconn.member.presentation.dto.AccessToken;
+import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
 import reactor.test.StepVerifier;
 
 @SpringBootTest
