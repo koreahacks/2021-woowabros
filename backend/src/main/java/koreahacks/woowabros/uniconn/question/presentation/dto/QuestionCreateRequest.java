@@ -18,7 +18,7 @@ public class QuestionCreateRequest {
         return Question.builder()
                 .title(title)
                 .content(content)
-                .isPayment(isPayment)
+                .price(0L)
                 .category(category)
                 .build();
     }

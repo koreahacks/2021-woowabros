@@ -31,7 +31,7 @@ public class MemberCreateRequest {
             .password(this.password)
             .major(this.major)
             .isVerified(false)
-            .authCode(UUID.randomUUID().toString().replaceAll("-",""))
+            .authCode(UUID.randomUUID().toString().replaceAll("-","").substring(0, 20))
             .univ(this.email)
             .build();
     }
