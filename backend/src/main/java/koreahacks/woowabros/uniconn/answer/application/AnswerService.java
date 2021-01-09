@@ -33,6 +33,11 @@ public class AnswerService {
                 .map(AnswerResponse::of).collectList();
     }
 
+    public Mono<Answer> reaction(ReactionType type, String answerId, Mono<Member> member) {
+        return member.flatMap(it -> answerRepository.findById(answerId).doOnNext(answer -> answer.addReaction(type, it.getId())))
+                .doOnNext(answerRepository::save);
+    }
+
     public void delete(String id) {
         answerRepository.deleteById(id);
     }
