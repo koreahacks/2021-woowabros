@@ -41,4 +41,8 @@ public class MemberService {
     public Mono<Member> findById(String id) {
         return memberRepository.findById(id);
     }
+
+    public Mono<Void> deleteById(String id) {
+        return memberRepository.deleteById(id);
+    }
 }
