@@ -8,3 +8,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    restart: always
+    depends_on:
+      - server
+  server:
+    image: docker.io/library/uniconn:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    restart: always

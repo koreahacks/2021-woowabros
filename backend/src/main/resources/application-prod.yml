@@ -1,0 +1,9 @@
+spring:
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: 13.125.198.186:9200
+  elasticsearch:
+    rest:
+      uris: http://13.125.198.186:9200
