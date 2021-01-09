@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Title from "../components/login/Title";
 import LoginInputs from "../components/login/LoginInputs";
 import ImageSrc from "../ImageSrc";
+import { loginTokenState } from "../store";
+import UserHelp from "../components/login/UserHelp";
 
 const LoginContent = styled.div`
   width: 100%;
@@ -30,7 +34,7 @@ const LoginWrapper = styled.div`
 
 const Login = () => {
   const [inputs, setInputs] = useState({
-    email: "",
+    email: localStorage.getItem("email") ? localStorage.getItem("email") : "",
     password: "",
   });
   const { email, password } = inputs;
@@ -41,9 +45,25 @@ const Login = () => {
       [name]: value,
     });
   };
+
   const [remember, setRemember] = useState(false);
   const handleRememberClick = () => {
     setRemember(!remember);
+  };
+
+  const [loginToken, setLoginToken] = useRecoilState(loginTokenState);
+  const history = useHistory();
+  const handleButtonClick = () => {
+    // TODO: link with api
+    setLoginToken("hiImGroot");
+    localStorage.setItem("loginToken", loginToken);
+    if (remember) {
+      localStorage.setItem("email", email);
+    }
+    if (!remember) {
+      localStorage.setItem("email", "");
+    }
+    history.push("/");
   };
 
   return (
@@ -59,7 +79,9 @@ const Login = () => {
           password={password}
           remember={remember}
           handleRememberClick={handleRememberClick}
+          handleButtonClick={handleButtonClick}
         />
+        <UserHelp />
       </LoginWrapper>
     </LoginContent>
   );
