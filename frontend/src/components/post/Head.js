@@ -8,18 +8,17 @@ const HeadWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
   width: calc(100% - 1rem);
   height: 1.625rem;
 `;
 
 const Head = ({ type }) => {
-
   return (
     <>
       <HeadWrapper>
         <BackButton type={type} />
-        <WriteButton>글쓰기</WriteButton>
+        <WriteButton />
       </HeadWrapper>
     </>
   );
