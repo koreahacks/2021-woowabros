@@ -18,3 +18,5 @@ services:
     environment:
       - "SPRING_PROFILES_ACTIVE=prod"
     restart: always
+    volumes:
+    - ./logs:/workspace/logs
