@@ -14,6 +14,8 @@ public class AnswerResponse {
 
     private String content;
 
+    private boolean isSelected;
+
     private Date createdAt;
 
     private String createdBy;
@@ -22,6 +24,7 @@ public class AnswerResponse {
         return AnswerResponse.builder()
                 .id(answer.getId())
                 .content(answer.getContent())
+                .isSelected(answer.isSelected())
                 .createdAt(answer.getCreatedAt())
                 .createdBy(answer.getUserId())
                 .build();
