@@ -24,6 +24,8 @@ public class Answer {
 
     private String content;
 
+    private boolean isSelected;
+
     private String userId;
 
     private String questionId;
