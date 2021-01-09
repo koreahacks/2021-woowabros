@@ -19,13 +19,13 @@ const Text = styled.p`
   color: #392f31;
 `;
 
-const BackButton = ({ type }) => {
+const BackButton = ({ text }) => {
   return (
     <BackButtonWrapper to="/">
       <ButtonImageWrapper>
         <ButtonImage src={ImageSrc.BACK} alt="뒤로가기" />
       </ButtonImageWrapper>
-      <Text>내 정보 보기</Text>
+      <Text>{text}</Text>
     </BackButtonWrapper>
   );
 };
