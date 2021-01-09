@@ -89,4 +89,9 @@ class MemberServiceTest {
             .build())
             .block();
     }
+
+    @Test
+    void changeWork() {
+
+    }
 }
