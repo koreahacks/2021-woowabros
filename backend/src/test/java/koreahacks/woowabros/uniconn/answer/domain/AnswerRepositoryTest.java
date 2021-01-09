@@ -9,6 +9,9 @@ import reactor.test.StepVerifier;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 @SpringBootTest
 class AnswerRepositoryTest {
 
@@ -33,5 +36,51 @@ class AnswerRepositoryTest {
         StepVerifier.create(result)
                 .expectNextCount(2)
                 .verifyComplete();
+    }
+
+    @Test
+    void saveNested() {
+        Answer answer = Answer.builder().build();
+        answer.addReaction(ReactionType.LIKE, "dd");
+        answer.addReaction(ReactionType.LIKE, "cc");
+        answer.addReaction(ReactionType.DISLIKE, "bb");
+        answerRepository.save(answer).block();
+
+        StepVerifier.create(answerRepository.findById(answer.getId()))
+                .consumeNextWith(it ->
+                        assertThat(it.getReactions())
+                                .extracting(Reaction::getUserId)
+                                .isEqualTo(Arrays.asList("dd", "cc", "bb"))
+                )
+                .verifyComplete();
+
+    }
+
+    @Test
+    void updateNested() {
+        Answer answer = Answer.builder().build();
+        answer.addReaction(ReactionType.LIKE, "dd");
+        answer.addReaction(ReactionType.LIKE, "cc");
+        answer.addReaction(ReactionType.DISLIKE, "bb");
+        answerRepository.save(answer).block();
+
+        answer.addReaction(ReactionType.LIKE, "bb");
+        answer.addReaction(ReactionType.LIKE, "aa");
+        answerRepository.save(answer).block();
+
+        StepVerifier.create(answerRepository.findById(answer.getId()))
+                .consumeNextWith(it ->
+                        assertAll(
+                                () -> assertThat(it.getReactions())
+                                        .extracting(Reaction::getUserId)
+                                        .isEqualTo(Arrays.asList("dd", "cc", "bb", "aa")),
+                                () -> assertThat(it.getReactions())
+                                        .extracting(Reaction::getType)
+                                        .containsOnly(ReactionType.LIKE)
+                        )
+
+                )
+                .verifyComplete();
+
     }
 }

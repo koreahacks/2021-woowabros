@@ -16,6 +16,10 @@ public class AnswerResponse {
 
     private boolean isSelected;
 
+    private long likeCount;
+
+    private long dislikeCount;
+
     private Date createdAt;
 
     private String createdBy;
@@ -25,6 +29,8 @@ public class AnswerResponse {
                 .id(answer.getId())
                 .content(answer.getContent())
                 .isSelected(answer.isSelected())
+                .likeCount(answer.countLike())
+                .dislikeCount(answer.countDislike())
                 .createdAt(answer.getCreatedAt())
                 .createdBy(answer.getUserId())
                 .build();
