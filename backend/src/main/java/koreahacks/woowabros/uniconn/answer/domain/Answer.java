@@ -1,5 +1,6 @@
 package koreahacks.woowabros.uniconn.answer.domain;
 
+import koreahacks.woowabros.uniconn.exception.AlreadySelectedException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,5 +64,15 @@ public class Answer {
         return reactions.stream()
                 .filter(it -> it.getType() == type)
                 .count();
+    }
+
+    public void verifyNotSelected() {
+        if (isSelected) {
+            throw new AlreadySelectedException();
+        }
+    }
+
+    public void select() {
+        isSelected = true;
     }
 }
