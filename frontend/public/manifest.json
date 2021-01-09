@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "유니콘",
+  "name": "유니콘",
+  "description": "인증된 대학생들의 질의응답 플랫폼, 유니콘",
   "icons": [
     {
       "src": "favicon.ico",
