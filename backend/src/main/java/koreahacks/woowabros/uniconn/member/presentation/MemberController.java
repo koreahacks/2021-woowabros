@@ -19,7 +19,6 @@ import koreahacks.woowabros.uniconn.member.application.MemberService;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -39,11 +38,6 @@ public class MemberController {
         return memberService.login(loginRequest);
     }
 
-    @GetMapping("/all")
-    public Flux<Member> getMember() {
-        return memberService.findAll();
-    }
-
     @GetMapping("/auth/{authCode}")
     public ServerHttpResponse auth(@PathVariable String authCode, ServerHttpResponse response) {
         memberService.authorize(authCode);
@@ -53,25 +47,29 @@ public class MemberController {
         return response;
     }
 
-    @GetMapping("/info")
-    public Mono<MemberInfoResponse> retrieveLoginMember(@LoginMember Member member) {
-        return memberService.findMemberInfo(member);
+    @GetMapping
+    public Mono<MemberResponse> retrieveSelf(@LoginMember Member member) {
+        return Mono.just(MemberResponse.of(member));
     }
 
     @GetMapping("/{id}")
-    public Mono<Member> retrieve(@PathVariable String id) {
+    public Mono<MemberResponse> retrieveById(@PathVariable String id) {
         return memberService.findById(id);
+    }
+
+    @GetMapping("/info")
+    public Mono<MemberInfoResponse> retrieveInfoSelf(@LoginMember Member member) {
+        return memberService.findMemberInfo(member);
+    }
+
+    @GetMapping("/info/{id}")
+    public Mono<MemberInfoResponse> retrieveInfo(@PathVariable String id) {
+        return memberService.findDetailById(id);
     }
 
 
     @DeleteMapping
     public Mono<Void> delete(@LoginMember Member loginMember) {
-        System.out.println(loginMember);
-        return Mono.empty();
-    }
-
-    @GetMapping
-    public Mono<Member> retrieveSelf(@LoginMember Member loginMember) {
-        return Mono.just(loginMember);
+        return memberService.delete(loginMember);
     }
 }

@@ -50,6 +50,6 @@ public class JwtAuthFilter implements WebFilter {
     }
 
     public boolean isExcludedPath(String path) {
-        return EXCLUDED_PATH.stream().anyMatch(path::contains);
+        return EXCLUDED_PATH.stream().anyMatch(path::contains) || path.equals("/") || path.equals("/index");
     }
 }

@@ -11,9 +11,9 @@ import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.AccessToken;
 import koreahacks.woowabros.uniconn.member.presentation.LoginRequest;
 import koreahacks.woowabros.uniconn.member.presentation.MemberCreateRequest;
+import koreahacks.woowabros.uniconn.member.presentation.MemberResponse;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
 import koreahacks.woowabros.uniconn.question.domain.QuestionRepository;
-import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionResponse;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -27,8 +27,6 @@ public class MemberService {
     private final AuthCodeGenerator authCodeGenerator;
     private final MemberRepository memberRepository;
     private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
-    private final ReactiveElasticsearchOperations operations;
 
     public Mono<String> create(MemberCreateRequest request) {
         Member member = request.toMember(authCodeGenerator);
@@ -44,8 +42,12 @@ public class MemberService {
             .flatMap(memberRepository::save);
     }
 
-    public Mono<Member> findById(String id) {
-        return memberRepository.findById(id);
+    public Mono<MemberInfoResponse> findDetailById(String id) {
+        return memberRepository.findById(id).flatMap(member ->
+            questionRepository.findAllByUserId(id)
+                .collectList()
+                .map(questions -> MemberInfoResponse.of(member,
+                    QuestionResponse.listOf(questions))));
     }
 
     public Mono<AccessToken> login(LoginRequest loginRequest) {
@@ -53,10 +55,14 @@ public class MemberService {
         return memberRepository.findFirstByEmail(email)
             .map(member -> {
                 if (member.isPasswordMatch(loginRequest.getPassword())) {
+                    if (!member.isVerified()) {
+                        throw new IllegalArgumentException("아직 이메일 인증이 완료되지 않았습니다");
+                    }
                     return jwtTokenProvider.createToken(email);
+                } else {
+                    throw new IllegalArgumentException("비밀번호가 맞지 않습니다");
                 }
-                throw new IllegalArgumentException("비밀번호가 맞지 않습니다");
-            });
+            }).onErrorStop();
     }
 
     public Mono<Member> findFirstByEmail(String email) {
@@ -68,10 +74,16 @@ public class MemberService {
             .flatMap(member1 ->
                 questionRepository.findAllByUserId(member.getId())
                     .collectList()
-                    .map(questions -> MemberInfoResponse.of(member1, QuestionResponse.listOf(questions))));
+                    .map(questions -> MemberInfoResponse.of(member1,
+                        QuestionResponse.listOf(questions))));
     }
 
-    public Flux<Member> findAll() {
-        return memberRepository.findAll();
+    public Mono<Void> delete(Member loginMember) {
+        return memberRepository.deleteById(loginMember.getId());
+    }
+
+    public Mono<MemberResponse> findById(String id) {
+        return memberRepository.findById(id)
+            .map(MemberResponse::of);
     }
 }
