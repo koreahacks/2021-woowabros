@@ -1,4 +1,4 @@
-package koreahacks.woowabros.uniconn.member.presentation;
+package koreahacks.woowabros.uniconn.member.presentation.dto;
 
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import lombok.AllArgsConstructor;

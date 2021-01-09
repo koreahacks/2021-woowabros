@@ -1,22 +1,19 @@
 package koreahacks.woowabros.uniconn.member.application;
 
-import org.springframework.data.elasticsearch.core.ReactiveElasticsearchOperations;
 import org.springframework.stereotype.Service;
 
-import koreahacks.woowabros.uniconn.answer.domain.AnswerRepository;
 import koreahacks.woowabros.uniconn.common.AuthCodeGenerator;
 import koreahacks.woowabros.uniconn.common.TokenProvider;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
-import koreahacks.woowabros.uniconn.member.presentation.AccessToken;
-import koreahacks.woowabros.uniconn.member.presentation.LoginRequest;
-import koreahacks.woowabros.uniconn.member.presentation.MemberCreateRequest;
-import koreahacks.woowabros.uniconn.member.presentation.MemberResponse;
+import koreahacks.woowabros.uniconn.member.presentation.dto.AccessToken;
+import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
+import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
+import koreahacks.woowabros.uniconn.member.presentation.dto.MemberResponse;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
 import koreahacks.woowabros.uniconn.question.domain.QuestionRepository;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionResponse;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor

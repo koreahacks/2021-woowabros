@@ -1,4 +1,4 @@
-package koreahacks.woowabros.uniconn.member.presentation;
+package koreahacks.woowabros.uniconn.member.presentation.dto;
 
 import java.util.UUID;
 
