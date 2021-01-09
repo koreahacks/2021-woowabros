@@ -35,4 +35,10 @@ public class Question {
     @CreatedDate
     @Field(type = FieldType.Date)
     private Date createdAt;
+
+    public void verifyMember(String userId) {
+        if (!this.userId.equals(userId)) {
+            throw new IllegalArgumentException("Question에 해당하는 userId가 아닙니다.");
+        }
+    }
 }
