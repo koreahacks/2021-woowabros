@@ -3,6 +3,7 @@ package koreahacks.woowabros.uniconn.question.application;
 import koreahacks.woowabros.uniconn.answer.application.AnswerService;
 import koreahacks.woowabros.uniconn.answer.domain.Answer;
 import koreahacks.woowabros.uniconn.answer.domain.AnswerRepository;
+import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.question.domain.Question;
 import koreahacks.woowabros.uniconn.question.domain.QuestionRepository;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
@@ -23,8 +24,8 @@ public class QuestionService {
         this.answerRepository = answerRepository;
     }
 
-    public Mono<String> create(QuestionCreateRequest request) {
-        Mono<Question> saved = questionRepository.save(request.toEntity());
+    public Mono<String> create(QuestionCreateRequest request, Member member) {
+        Mono<Question> saved = questionRepository.save(request.toEntity(member.getId()));
         return saved.map(Question::getId);
     }
 

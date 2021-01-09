@@ -5,6 +5,7 @@ import koreahacks.woowabros.uniconn.answer.domain.AnswerRepository;
 import koreahacks.woowabros.uniconn.answer.domain.ReactionType;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
+import koreahacks.woowabros.uniconn.common.LoginMember;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.question.domain.QuestionRepository;
@@ -25,8 +26,8 @@ public class AnswerService {
         this.questionRepository = questionRepository;
     }
 
-    public Mono<String> create(AnswerCreateRequest request) {
-        return answerRepository.save(request.toEntity())
+    public Mono<String> create(AnswerCreateRequest request, Member member) {
+        return answerRepository.save(request.toEntity(member.getId()))
                 .map(Answer::getId);
     }
 
