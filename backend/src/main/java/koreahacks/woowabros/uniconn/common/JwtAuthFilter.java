@@ -1,16 +1,15 @@
 package koreahacks.woowabros.uniconn.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
-
-import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -39,11 +38,11 @@ public class JwtAuthFilter implements WebFilter {
 
         try {
             String authHeader = request.getHeaders().getFirst("Authorization");
-            if (authHeader == "test-token") {
-                String email = jwtTokenProvider.getSubject(authHeader != null ? authHeader.substring(7) : null);
-                exchange.getAttributes().put("email", email);
-            } else {
+            if (authHeader.equals("test-token")) {
                 exchange.getAttributes().put("email", "test-email.com");
+            } else {
+                String email = jwtTokenProvider.getSubject(authHeader.substring(7));
+                exchange.getAttributes().put("email", email);
             }
 
             return chain.filter(exchange);
