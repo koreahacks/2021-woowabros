@@ -1,26 +1,54 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const clickedColor = "#800000";
 const unclickedColor = "red";
 
-const TabWrapper = styled.div`
+const TabWrapper = styled(NavLink)`
   width: 25%;
+  height: 100%;
+  margin: auto;
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 `;
 
-const TabImg = styled.svg`
+const TabContent = styled.div`
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TabImg = styled.img`
   // fill: ${(props) => (props.present ? clickedColor : unclickedColor)};
 `;
 
-const TabName = styled.div``;
+const TabName = styled.div`
+  font-size: 0.5rem;
+  color: #000;
+  text-align: center;
+`;
 
-const Tab = ({ data }) => {
-  console.log(window.location);
-  console.log(data.url, data.url === window.location.pathname);
+const Tab = ({ data, functions }) => {
   return (
-    <TabWrapper onClick={() => {}}>
-      <TabImg src={data.src} present={data.url === window.location.pathname} />
-      <TabName>{data.name}</TabName>
+    <TabWrapper to={data.url}>
+      <TabContent>
+        <TabImg
+          src={data.src}
+          present={data.url === window.location.pathname}
+        />
+        <TabName>{data.name}</TabName>
+      </TabContent>
     </TabWrapper>
   );
 };
