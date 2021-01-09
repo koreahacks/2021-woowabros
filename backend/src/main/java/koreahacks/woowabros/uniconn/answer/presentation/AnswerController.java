@@ -1,7 +1,6 @@
 package koreahacks.woowabros.uniconn.answer.presentation;
 
 import koreahacks.woowabros.uniconn.answer.application.AnswerService;
-import koreahacks.woowabros.uniconn.answer.domain.Reaction;
 import koreahacks.woowabros.uniconn.answer.domain.ReactionType;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
@@ -33,9 +32,14 @@ public class AnswerController {
         return answerService.findBy(userId);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/reaction")
     public void reaction(@LoginMember Member member, @PathVariable String id, @RequestBody ReactionType type) {
         answerService.reaction(type, id, member);
+    }
+
+    @PostMapping("/{id}/select")
+    public void select(@LoginMember Member member, @PathVariable String id) {
+        answerService.select(id, member);
     }
 
     @DeleteMapping("/{id}")
