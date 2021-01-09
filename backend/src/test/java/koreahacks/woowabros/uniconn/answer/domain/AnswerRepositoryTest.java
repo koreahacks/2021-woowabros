@@ -17,7 +17,7 @@ class AnswerRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        answerRepository.deleteAll().blockOptional();
+        answerRepository.deleteAll().block();
     }
 
     @Test

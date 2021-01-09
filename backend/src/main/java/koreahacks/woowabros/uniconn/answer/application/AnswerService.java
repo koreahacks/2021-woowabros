@@ -5,8 +5,9 @@ import koreahacks.woowabros.uniconn.answer.domain.AnswerRepository;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Service
 public class AnswerService {
@@ -22,9 +23,9 @@ public class AnswerService {
                 .map(Answer::getId);
     }
 
-    public Flux<AnswerResponse> findBy(String userId) {
+    public Mono<List<AnswerResponse>> findBy(String userId) {
         return answerRepository.findByUserId(userId)
-                .map(AnswerResponse::of);
+                .map(AnswerResponse::of).collectList();
     }
 
     public void delete(String id) {

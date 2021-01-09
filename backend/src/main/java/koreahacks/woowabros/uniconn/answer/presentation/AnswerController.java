@@ -5,8 +5,9 @@ import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/answers")
@@ -24,7 +25,7 @@ public class AnswerController {
     }
 
     @GetMapping("/{userId}")
-    public Flux<AnswerResponse> findBy(@PathVariable String userId) {
+    public Mono<List<AnswerResponse>> findBy(@PathVariable String userId) {
         return answerService.findBy(userId);
     }
 

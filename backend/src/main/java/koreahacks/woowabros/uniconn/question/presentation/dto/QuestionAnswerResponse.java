@@ -1,15 +1,21 @@
 package koreahacks.woowabros.uniconn.question.presentation.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import koreahacks.woowabros.uniconn.answer.domain.Answer;
+import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
 import koreahacks.woowabros.uniconn.question.domain.Question;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Data
 @Builder
-public class QuestionCommentResponse {
+public class QuestionAnswerResponse {
 
     private String id;
 
@@ -24,14 +30,18 @@ public class QuestionCommentResponse {
 
     private Date createdAt;
 
-    // TODO: Comment 만들고 추가!
-    public static QuestionCommentResponse of(Question question) {
-        return QuestionCommentResponse.builder()
+    private List<AnswerResponse> answers;
+
+    public static QuestionAnswerResponse of(Question question, List<Answer> answers) {
+
+
+        return QuestionAnswerResponse.builder()
                 .id(question.getId())
                 .title(question.getTitle())
                 .content(question.getContent())
                 .price(question.getPrice())
                 .createdAt(question.getCreatedAt())
+                .answers(answers.stream().map(AnswerResponse::of).collect(toList()))
                 .build();
     }
 }
