@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(targetEmail);
             helper.setSubject("유니콘 인증 메일");
             helper.setText("<h1>안녕하세요. 유니콘입니다. 다음 링크를 클릭해주세요.</h1>"
-                + "<h2>http://localhost:8080/auth/" + authCode + "</h2>", true);
+                + "<h2>http://localhost:8080/api/members/auth/" + authCode + "</h2>", true);
         } catch (MessagingException e) {
             throw new IllegalArgumentException();
         }
