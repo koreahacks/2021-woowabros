@@ -64,7 +64,9 @@ const UserSummary = ({ data, functions }) => {
         <Major>{userSummary.major}</Major>
         <Name>{userSummary.name}</Name>
         <Percentile>상위 {userSummary.rank}%</Percentile>
-        <ShowMyInfo>내 정보 보기</ShowMyInfo>
+        <ShowMyInfo onClick={() => functions.go(`/users/`)}>
+          내 정보 보기
+        </ShowMyInfo>
       </UserInfoWrapper>
     </UserSummaryWrapper>
   );

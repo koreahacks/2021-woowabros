@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import Header from "../components/home/Header";
 import UserSummary from "../components/home/UserSummary";
 import { AppWrapper } from "../util/SharedStyles";
-import Post from "../components/home/PostButtons";
+import PostButtons from "../components/home/PostButtons";
 import PostSummary from "../components/home/PostSummary";
+import Navbar from "../components/navbar/NavigationBar";
 
-const Home = () => {
+const Home = ({ history }) => {
   const [userSummary, setUserSummary] = useState({
     school: "한국대학교",
     major: "컴퓨터학과",
@@ -74,6 +75,10 @@ const Home = () => {
     },
   ]);
 
+  const go = (url) => {
+    history.push(url);
+  };
+
   return (
     <AppWrapper>
       <Header />
@@ -82,12 +87,14 @@ const Home = () => {
           userSummary: userSummary,
           chart: { data: chartData, captions: captions },
         }}
+        functions={{ go }}
       />
-      <Post />
+      <PostButtons functions={{ go }} />
       <PostSummary data={{ title: "실명 게시판", summary: namedPostSummary }} />
       <PostSummary
         data={{ title: "익명 게시판", summary: anonymousPostSummary }}
       />
+      <Navbar />
     </AppWrapper>
   );
 };
