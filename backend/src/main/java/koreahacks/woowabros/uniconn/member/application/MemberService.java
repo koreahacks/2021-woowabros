@@ -1,12 +1,21 @@
 package koreahacks.woowabros.uniconn.member.application;
 
-import org.springframework.data.elasticsearch.core.ReactiveDocumentOperations;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.springframework.data.elasticsearch.core.ReactiveElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.ReactiveElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.document.Document;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.UpdateQuery;
 import org.springframework.stereotype.Service;
 
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.MemberCreateRequest;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -14,7 +23,6 @@ import reactor.core.publisher.Mono;
 public class MemberService {
     private final EmailService mailSender;
     private final MemberRepository memberRepository;
-    private final ReactiveDocumentOperations documentOperations;
 
     public Mono<String> create(MemberCreateRequest request) {
         Member member = request.toMember();
@@ -24,15 +32,13 @@ public class MemberService {
         return save.map(Member::getId);
     }
 
-    public void authorize(String authCode) {
-        memberRepository.findByAuthCode(authCode)
-            .doOnNext(member -> memberRepository.deleteById(member.getId()))
+    public Mono<Member> authorize(String authCode) {
+        return memberRepository.findFirstByAuthCode(authCode)
             .doOnNext(Member::verify)
-            .doOnNext(memberRepository::save);
+            .flatMap(memberRepository::save);
     }
 
-    public Mono<Member> findByAuthCode(String authCode) {
-        return memberRepository.findByAuthCode(authCode);
+    public Mono<Member> findById(String id) {
+        return memberRepository.findById(id);
     }
-
 }

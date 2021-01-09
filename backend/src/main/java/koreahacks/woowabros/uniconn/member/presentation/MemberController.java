@@ -18,6 +18,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import koreahacks.woowabros.uniconn.member.application.MemberService;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -33,12 +34,13 @@ public class MemberController {
     }
 
     @GetMapping("/auth/{authCode}")
-    public Mono<Member> auth(@PathVariable String authCode, ServerHttpResponse response) {
-        memberService.authorize(authCode);
-        response.setStatusCode(HttpStatus.PERMANENT_REDIRECT);
-        response.getHeaders().setLocation(URI.create("/"));
+    public Mono<Member> auth(@PathVariable String authCode) {
+        return memberService.authorize(authCode);
+    }
 
-        return memberService.findByAuthCode(authCode);
+    @GetMapping("/{id}")
+    public Mono<Member> retrieve(@PathVariable String id) {
+        return memberService.findById(id);
     }
 
 }

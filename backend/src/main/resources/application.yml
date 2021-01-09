@@ -10,3 +10,11 @@ spring:
           auth: true
           starttls:
             enable: true
+logging:
+  level:
+    org:
+      elasticsearch:
+        index:
+          search:
+            slowlog:
+              query: INFO
