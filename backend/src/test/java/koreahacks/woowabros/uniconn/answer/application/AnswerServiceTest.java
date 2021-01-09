@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,7 +42,7 @@ class AnswerServiceTest {
         answer.addReaction(ReactionType.DISLIKE, "bb");
         answerRepository.save(answer).block();
 
-        StepVerifier.create(answerService.reaction(ReactionType.LIKE, answer.getId(), Mono.just(member)))
+        StepVerifier.create(answerService.reaction(ReactionType.LIKE, answer.getId(), member))
                 .consumeNextWith(it -> assertThat(it.getReactions()).extracting(Reaction::getType).containsOnly(ReactionType.LIKE))
                 .verifyComplete();
 

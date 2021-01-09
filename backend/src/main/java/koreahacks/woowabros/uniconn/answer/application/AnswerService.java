@@ -33,8 +33,9 @@ public class AnswerService {
                 .map(AnswerResponse::of).collectList();
     }
 
-    public Mono<Answer> reaction(ReactionType type, String answerId, Mono<Member> member) {
-        return member.flatMap(it -> answerRepository.findById(answerId).doOnNext(answer -> answer.addReaction(type, it.getId())))
+    public Mono<Answer> reaction(ReactionType type, String answerId, Member member) {
+        return answerRepository.findById(answerId)
+                .doOnNext(answer -> answer.addReaction(type, member.getId()))
                 .doOnNext(answerRepository::save);
     }
 

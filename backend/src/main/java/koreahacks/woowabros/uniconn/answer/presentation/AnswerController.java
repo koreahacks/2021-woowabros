@@ -1,8 +1,12 @@
 package koreahacks.woowabros.uniconn.answer.presentation;
 
 import koreahacks.woowabros.uniconn.answer.application.AnswerService;
+import koreahacks.woowabros.uniconn.answer.domain.Reaction;
+import koreahacks.woowabros.uniconn.answer.domain.ReactionType;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
+import koreahacks.woowabros.uniconn.common.LoginMember;
+import koreahacks.woowabros.uniconn.member.domain.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -27,6 +31,11 @@ public class AnswerController {
     @GetMapping("/user/{userId}")
     public Mono<List<AnswerResponse>> findBy(@PathVariable String userId) {
         return answerService.findBy(userId);
+    }
+
+    @PostMapping("/{id}")
+    public void reaction(@LoginMember Member member, @PathVariable String id, @RequestBody ReactionType type) {
+        answerService.reaction(type, id, member);
     }
 
     @DeleteMapping("/{id}")
