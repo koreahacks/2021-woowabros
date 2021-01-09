@@ -1,6 +1,7 @@
 package koreahacks.woowabros.uniconn.answer.domain;
 
 import koreahacks.woowabros.uniconn.exception.AlreadySelectedException;
+import koreahacks.woowabros.uniconn.member.domain.Major;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,8 @@ public class Answer {
     private String content;
 
     private boolean isSelected;
+
+    private Major major;
 
     @Field(type = FieldType.Nested, includeInParent = true)
     @Builder.Default

@@ -1,6 +1,7 @@
 package koreahacks.woowabros.uniconn.answer.presentation.dto;
 
 import koreahacks.woowabros.uniconn.answer.domain.Answer;
+import koreahacks.woowabros.uniconn.member.domain.Major;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +14,8 @@ public class AnswerResponse {
     private String id;
 
     private String content;
+
+    private Major major;
 
     private boolean isSelected;
 
@@ -28,6 +31,7 @@ public class AnswerResponse {
         return AnswerResponse.builder()
                 .id(answer.getId())
                 .content(answer.getContent())
+                .major(answer.getMajor())
                 .isSelected(answer.isSelected())
                 .likeCount(answer.countLike())
                 .dislikeCount(answer.countDislike())

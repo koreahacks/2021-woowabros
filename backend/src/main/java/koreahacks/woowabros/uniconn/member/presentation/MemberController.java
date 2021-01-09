@@ -1,6 +1,7 @@
 package koreahacks.woowabros.uniconn.member.presentation;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import koreahacks.woowabros.uniconn.answer.domain.Answer;
 import koreahacks.woowabros.uniconn.common.LoginMember;
 import koreahacks.woowabros.uniconn.member.application.MemberService;
 import koreahacks.woowabros.uniconn.member.domain.Member;
@@ -22,7 +24,9 @@ import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberResponse;
+import koreahacks.woowabros.uniconn.member.presentation.dto.StatisticResponse;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -74,5 +78,10 @@ public class MemberController {
     @DeleteMapping
     public Mono<Void> delete(@LoginMember Member loginMember) {
         return memberService.delete(loginMember);
+    }
+
+    @GetMapping("/statistic/{id}")
+    public Mono<List<StatisticResponse>> calculateStatistic(@PathVariable String id) {
+        return memberService.calculateStatistic(id);
     }
 }

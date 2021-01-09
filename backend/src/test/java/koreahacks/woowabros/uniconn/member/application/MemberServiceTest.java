@@ -1,19 +1,31 @@
 package koreahacks.woowabros.uniconn.member.application;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import koreahacks.woowabros.uniconn.answer.domain.Answer;
+import koreahacks.woowabros.uniconn.answer.domain.AnswerRepository;
 import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
+import reactor.test.StepVerifier;
 
 @SpringBootTest
 class MemberServiceTest {
 
     @Autowired
+    private MemberService memberService;
+
+    @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
 
     @BeforeEach
     void setUp() {
@@ -45,4 +57,5 @@ class MemberServiceTest {
             .build())
             .block();
     }
+
 }
