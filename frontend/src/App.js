@@ -1,10 +1,7 @@
-import './App.css';
+import SwitchRoutes from "./Routes";
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+  return <SwitchRoutes />;
 }
 
 export default App;
