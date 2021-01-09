@@ -3,6 +3,13 @@ import styled from "styled-components";
 import Question from "../components/post/Question";
 import Head from "../components/post/Head";
 import Search from "../components/post/Search";
+import {AppWrapper} from "../util/SharedStyles";
+
+const PostWrapper = styled(AppWrapper)`
+display: flex;
+flex-direction: column;
+align-items: center;
+`
 
 const QuestionWrapper = styled.div`
   width: calc(100% - 1rem);
@@ -98,7 +105,7 @@ const Post = ({ match }) => {
     setSearch("");
   };
   return (
-    <>
+    <PostWrapper>
       <Head type={type === "anonymous" ? "익명" : "실명"} />
       <Search
         search={search}
@@ -121,7 +128,7 @@ const Post = ({ match }) => {
           );
         })}
       </QuestionWrapper>
-    </>
+    </PostWrapper>
   );
 };
 
