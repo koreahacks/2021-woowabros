@@ -79,7 +79,7 @@ const User = () => {
 
   return (
     <AppWrapper>
-      <Head title="내 정보 보기" />
+      <Head text="내 정보 보기" />
       <Chart
         data={{
           chart: { data: chartData, captions: captions },
