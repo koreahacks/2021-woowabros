@@ -24,7 +24,7 @@ public class Question {
 
     private String content;
 
-    private boolean isPayment;
+    private long price;
 
     private String category;
 
