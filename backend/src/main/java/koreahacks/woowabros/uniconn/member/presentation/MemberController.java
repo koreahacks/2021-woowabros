@@ -25,7 +25,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping(value = "/join")
+    @PostMapping("/join")
     public Mono<String> create(@Valid @RequestBody MemberCreateRequest request) {
         return memberService.create(request);
     }
@@ -35,13 +35,9 @@ public class MemberController {
         return memberService.login(loginRequest);
     }
 
-    @GetMapping("/auth/{authCode}")
-    public ServerHttpResponse auth(@PathVariable String authCode, ServerHttpResponse response) {
-        memberService.authorize(authCode);
-        response.setStatusCode(HttpStatus.PERMANENT_REDIRECT);
-        response.getHeaders().setLocation(URI.create("/"));
-
-        return response;
+    @GetMapping("/auth")
+    public Mono<String> auth(@RequestParam("code") String code) {
+        return memberService.authorize(code);
     }
 
     @GetMapping

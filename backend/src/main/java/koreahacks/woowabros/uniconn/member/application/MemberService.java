@@ -39,10 +39,11 @@ public class MemberService {
         return save.map(Member::getId);
     }
 
-    public void authorize(String authCode) {
-        memberRepository.findFirstByAuthCode(authCode)
+    public Mono<String> authorize(String authCode) {
+        return memberRepository.findFirstByAuthCode(authCode)
                 .doOnNext(Member::verify)
-                .flatMap(memberRepository::save);
+                .flatMap(memberRepository::save)
+                .map(Member::getId);
     }
 
     public Mono<MemberInfoResponse> findDetailById(String id) {

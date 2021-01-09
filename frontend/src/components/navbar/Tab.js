@@ -19,9 +19,9 @@ const TabWrapper = styled(NavLink)`
   &:active {
     text-decoration: none;
   }
-  
+
   opacity: 0.4;
-  
+
   &.active {
     opacity: 1;
   }
@@ -54,8 +54,6 @@ const Tab = ({ data, functions }) => {
   useEffect(() => {
     setUserId(authState.userId);
   }, [authState.userId]);
-
-  console.log(userId);
 
   return (
     <TabWrapper exact={data.url === "/"} to={data.url} activeClassName="active">

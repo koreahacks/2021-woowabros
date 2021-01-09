@@ -1,7 +1,9 @@
 import React from "react";
 
+import { AppWrapper } from "../util/SharedStyles";
+
 const UserPost = () => {
-  return <>유저포스트</>;
+  return <AppWrapper></AppWrapper>;
 };
 
 export default UserPost;
