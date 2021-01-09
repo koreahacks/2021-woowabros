@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 import HomePage from "./pages/Home";
@@ -10,6 +10,7 @@ import PostPage from "./pages/Post";
 import RankingPage from "./pages/Ranking";
 import UserPostPage from "./pages/UserPost";
 import { loginTokenState } from "./store";
+import NavigationBar from "./components/navbar/NavigationBar";
 
 const routes = [
   {
@@ -58,6 +59,7 @@ const routes = [
 ];
 
 const SwitchRoutes = () => {
+  const location = useLocation();
   const loginToken = useRecoilValue(loginTokenState);
   return (
     <>
@@ -65,7 +67,9 @@ const SwitchRoutes = () => {
         {routes.map(({ path, page, exact }, key) => (
           <Route path={path} key={key} component={page} exact={exact} />
         ))}
+        <Route component={NavigationBar} />
       </Switch>
+      {location.pathname !== "/sign-in" && <NavigationBar />}
       {loginToken === "" ? <Redirect to="/sign-in" /> : <></>}
     </>
   );

@@ -13,7 +13,13 @@ const ImageSrc = {
   THUMBS_UP: PUBLIC_URL + "thumbs_up.svg",
   UNICORN: PUBLIC_URL + "unicorn.svg",
   HOME: PUBLIC_URL + "home.svg",
+  HOME_FILL: PUBLIC_URL + "home_fill.svg",
   ACCOUNT: PUBLIC_URL + "account.svg",
+  ACCOUNT_FILL: PUBLIC_URL + "account_fill.svg",
+  VERIFIED: PUBLIC_URL + "verified.svg",
+  VERIFIED_FILL: PUBLIC_URL + "verified_fill.svg",
+  HELP: PUBLIC_URL + "help.svg",
+  HELP_FILL: PUBLIC_URL + "help_fill.svg",
 };
 
 export default ImageSrc;

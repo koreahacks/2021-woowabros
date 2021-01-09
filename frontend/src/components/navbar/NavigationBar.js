@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSrc from "../../ImageSrc";
 import Tab from "./Tab";
+
+const TABS = [
+  {
+    src: ImageSrc.HOME,
+    name: "홈",
+    url: "/",
+  },
+  {
+    src: ImageSrc.VERIFIED,
+    name: "실명게시판",
+    url: "/posts/named",
+  },
+  {
+    src: ImageSrc.HELP,
+    name: "익명게시판",
+    url: "/posts/anonymous",
+  },
+  {
+    src: ImageSrc.ACCOUNT,
+    name: "내 정보",
+    url: `/users/`,
+  },
+];
 
 const NavigationWrapper = styled.div`
   position: fixed;
@@ -17,34 +40,9 @@ const NavigationWrapper = styled.div`
 const NavigationBar = () => {
   return (
     <NavigationWrapper>
-      <Tab
-        data={{
-          src: ImageSrc.HOME,
-          name: "홈",
-          url: "/",
-        }}
-      />
-      <Tab
-        data={{
-          src: ImageSrc.NAMED,
-          name: "실명게시판",
-          url: "/posts/named",
-        }}
-      />
-      <Tab
-        data={{
-          src: ImageSrc.ANONYMOUS,
-          name: "익명게시판",
-          url: "/posts/anonymous",
-        }}
-      />
-      <Tab
-        data={{
-          src: ImageSrc.ACCOUNT,
-          name: "내 정보",
-          url: `/users/`,
-        }}
-      />
+      {TABS.map((tabData, key) => (
+        <Tab data={tabData} key={key} />
+      ))}
     </NavigationWrapper>
   );
 };
