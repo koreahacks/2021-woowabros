@@ -14,6 +14,35 @@ const Home = () => {
     id: 1,
     rank: 0.00001,
   });
+  const [chartData, setChartData] = useState([
+    {
+      data: {
+        battery: 0.7,
+        design: 0.8,
+        useful: 0.9,
+        speed: 0.67,
+        weight: 0.8,
+      },
+      meta: { color: "blue" },
+    },
+    {
+      data: {
+        battery: 0.6,
+        design: 0.85,
+        useful: 0.5,
+        speed: 0.6,
+        weight: 0.7,
+      },
+      meta: { color: "red" },
+    },
+  ]);
+  const [captions, setCaptions] = useState({
+    battery: "Battery Capacity",
+    design: "Design",
+    useful: "Usefulness",
+    speed: "Speed",
+    weight: "Weight",
+  });
 
   const [namedPostSummary, setNamedPostSummary] = useState([
     {
@@ -48,7 +77,12 @@ const Home = () => {
   return (
     <AppWrapper>
       <Header />
-      <UserSummary data={{ userSummary }} />
+      <UserSummary
+        data={{
+          userSummary: userSummary,
+          chart: { data: chartData, captions: captions },
+        }}
+      />
       <Post />
       <PostSummary data={{ title: "실명 게시판", summary: namedPostSummary }} />
       <PostSummary

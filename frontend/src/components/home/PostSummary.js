@@ -33,7 +33,6 @@ const Summary = styled.div`
 `;
 
 const PostSummary = ({ data, functions }) => {
-  console.log(data.summary);
   return (
     <PostSummaryWrapper>
       <Header>
