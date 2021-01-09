@@ -45,3 +45,6 @@ spring:
   elasticsearch:
     rest:
       uris: http://13.125.198.186:9200
+logging:
+  file:
+    path: logs
