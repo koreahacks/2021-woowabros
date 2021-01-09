@@ -1,4 +1,6 @@
-import { Switch, Route } from "react-router-dom";
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
@@ -7,6 +9,7 @@ import UserPage from "./pages/User";
 import PostPage from "./pages/Post";
 import RankingPage from "./pages/Ranking";
 import UserPostPage from "./pages/UserPost";
+import { loginTokenState } from "./store";
 
 const routes = [
   {
@@ -54,12 +57,18 @@ const routes = [
   },
 ];
 
-const SwitchRoutes = () => (
-  <Switch>
-    {routes.map(({ path, page, exact }, key) => (
-      <Route path={path} key={key} component={page} exact={exact} />
-    ))}
-  </Switch>
-);
+const SwitchRoutes = () => {
+  const loginToken = useRecoilValue(loginTokenState);
+  return (
+    <>
+      <Switch>
+        {routes.map(({ path, page, exact }, key) => (
+          <Route path={path} key={key} component={page} exact={exact} />
+        ))}
+      </Switch>
+      {loginToken === "" ? <Redirect to="/sign-in" /> : <></>}
+    </>
+  );
+};
 
 export default SwitchRoutes;
