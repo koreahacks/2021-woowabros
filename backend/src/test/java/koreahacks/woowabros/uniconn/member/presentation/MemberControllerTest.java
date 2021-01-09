@@ -1,11 +1,18 @@
 package koreahacks.woowabros.uniconn.member.presentation;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+
+import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
+import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
+import reactor.core.publisher.Mono;
 
 @SpringBootTest
 class MemberControllerTest {
@@ -17,18 +24,39 @@ class MemberControllerTest {
 
     @BeforeEach
     void setUp() {
-        webTestClient = WebTestClient.bindToController(memberController)
+        webTestClient = WebTestClient.bindToServer()
+            .baseUrl("http://localhost:8080")
             .build();
     }
 
+    @DisplayName("회원 가입")
     @Test
-    void sample() {
-        webTestClient.delete()
-            .uri("/api/members")
-            .header("Authorization",
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkcXJkMTIzNDVAZ21haWwuY29tIiwiaWF0IjoxNjEwMTgxMzY5LCJleHAiOjE2MTIzMjg4NTN9.CXAq3jUrJFyzlsYuPJ2girJPp6e7he1UmESXFaXxH-c")
+    void create() {
+        MemberCreateRequest request = new MemberCreateRequest("abc@korea.ac.kr", "12345678", "dd",
+            "Computer Science");
+
+        webTestClient.post()
+            .uri("/api/members/join")
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .bodyValue(request)
             .exchange()
-            .expectStatus()
-            .isOk();
+            .expectStatus().isOk()
+            .expectBody().consumeWith(body -> assertThat(body).isNotNull());
+    }
+
+    @DisplayName("로그인")
+    @Test
+    void login() {
+        LoginRequest request = new LoginRequest("abc@korea.ac.kr", "12345678");
+
+        webTestClient.post()
+            .uri("/api/members/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .bodyValue(request)
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody().consumeWith(body -> assertThat(body).isNotNull());
     }
 }

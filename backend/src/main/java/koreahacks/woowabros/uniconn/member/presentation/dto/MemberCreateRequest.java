@@ -12,8 +12,10 @@ import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.University;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class MemberCreateRequest {
 

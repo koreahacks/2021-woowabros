@@ -32,13 +32,13 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/join")
+    @PostMapping(value = "/join")
     public Mono<String> create(@Valid @RequestBody MemberCreateRequest request) {
         return memberService.create(request);
     }
 
     @PostMapping("/login")
-    public Mono<AccessToken> getToken(@RequestBody LoginRequest loginRequest) {
+    public Mono<AccessToken> getToken(@Valid @RequestBody LoginRequest loginRequest) {
         return memberService.login(loginRequest);
     }
 
@@ -70,7 +70,6 @@ public class MemberController {
     public Mono<MemberInfoResponse> retrieveInfo(@PathVariable String id) {
         return memberService.findDetailById(id);
     }
-
 
     @DeleteMapping
     public Mono<Void> delete(@LoginMember Member loginMember) {
