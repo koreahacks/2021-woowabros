@@ -29,15 +29,15 @@ const ButtonText = styled.div`
   font-size: 0.75rem;
 `;
 
-const Post = () => {
+const PostButtons = ({ functions }) => {
   return (
     <PostWrapper>
       <ButtonWrapper>
-        <Button>
+        <Button onClick={() => functions.go("/posts/named")}>
           <ButtonImg src={IMAGE_SRC.ANONYMOUS} alt="anonymous-board-image" />
           <ButtonText>실명게시판</ButtonText>
         </Button>
-        <Button>
+        <Button onClick={() => functions.go("/posts/anonymous")}>
           <ButtonImg src={IMAGE_SRC.NAMED} alt="named-board-image" />
           <ButtonText>익명게시판</ButtonText>
         </Button>
@@ -46,4 +46,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostButtons;
