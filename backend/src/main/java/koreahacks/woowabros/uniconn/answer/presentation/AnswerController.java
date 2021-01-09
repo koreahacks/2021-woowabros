@@ -24,7 +24,7 @@ public class AnswerController {
         return answerService.create(request);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public Mono<List<AnswerResponse>> findBy(@PathVariable String userId) {
         return answerService.findBy(userId);
     }

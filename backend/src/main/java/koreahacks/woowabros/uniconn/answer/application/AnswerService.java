@@ -2,8 +2,11 @@ package koreahacks.woowabros.uniconn.answer.application;
 
 import koreahacks.woowabros.uniconn.answer.domain.Answer;
 import koreahacks.woowabros.uniconn.answer.domain.AnswerRepository;
+import koreahacks.woowabros.uniconn.answer.domain.ReactionType;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
+import koreahacks.woowabros.uniconn.member.domain.Member;
+import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -13,9 +16,11 @@ import java.util.List;
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
+    private final MemberRepository memberRepository;
 
-    public AnswerService(AnswerRepository answerRepository) {
+    public AnswerService(AnswerRepository answerRepository, MemberRepository memberRepository) {
         this.answerRepository = answerRepository;
+        this.memberRepository = memberRepository;
     }
 
     public Mono<String> create(AnswerCreateRequest request) {
