@@ -1,4 +1,4 @@
-package koreahacks.woowabros.uniconn.question.domain;
+package koreahacks.woowabros.uniconn.answer.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,25 +10,21 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.time.Instant;
 
-@Document(indexName = "questions", createIndex = false, useServerConfiguration = true)
+@Document(indexName = "answers", createIndex = false, useServerConfiguration = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
-public class Question {
+public class Answer {
 
     @Id
     private String id;
 
-    private String title;
-
     private String content;
 
-    private long price;
-
-    private String category;
-
     private String userId;
+
+    private String questionId;
 
     @CreatedDate
     private Instant createdAt;
