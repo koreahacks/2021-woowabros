@@ -18,11 +18,12 @@ public class AnswerCreateRequest {
 
     private String questionId;
 
-    public Answer toEntity() {
+    public Answer toEntity(String userId) {
         return Answer.builder()
                 .content(content)
                 .major(major)
                 .questionId(questionId)
+                .userId(userId)
                 .build();
     }
 }

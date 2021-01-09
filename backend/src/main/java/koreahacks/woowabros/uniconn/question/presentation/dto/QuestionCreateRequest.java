@@ -14,9 +14,7 @@ public class QuestionCreateRequest {
 
     private String category;
 
-    private String userId;
-
-    public Question toEntity() {
+    public Question toEntity(String userId) {
         return Question.builder()
                 .title(title)
                 .content(content)

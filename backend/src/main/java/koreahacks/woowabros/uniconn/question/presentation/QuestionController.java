@@ -1,5 +1,7 @@
 package koreahacks.woowabros.uniconn.question.presentation;
 
+import koreahacks.woowabros.uniconn.common.LoginMember;
+import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.question.application.QuestionService;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionCreateRequest;
@@ -19,8 +21,8 @@ public class QuestionController {
     }
 
     @PostMapping
-    public Mono<String> create(@RequestBody QuestionCreateRequest request) {
-        return questionService.create(request);
+    public Mono<String> create(@LoginMember Member member, @RequestBody QuestionCreateRequest request) {
+        return questionService.create(request, member);
     }
 
     @GetMapping("/{id}")

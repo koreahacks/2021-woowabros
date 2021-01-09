@@ -6,7 +6,6 @@ import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerCreateRequest;
 import koreahacks.woowabros.uniconn.answer.presentation.dto.AnswerResponse;
 import koreahacks.woowabros.uniconn.common.LoginMember;
 import koreahacks.woowabros.uniconn.member.domain.Member;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -23,8 +22,8 @@ public class AnswerController {
     }
 
     @PostMapping
-    public Mono<String> create(AnswerCreateRequest request) {
-        return answerService.create(request);
+    public Mono<String> create(@LoginMember Member member, AnswerCreateRequest request) {
+        return answerService.create(request, member);
     }
 
     @GetMapping("/user/{userId}")
