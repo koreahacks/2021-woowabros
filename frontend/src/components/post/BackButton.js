@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import ImageSrc from "../../ImageSrc";
 
-const BackButtonWrapper = styled(Link)`
+const BackButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -19,8 +19,12 @@ const Text = styled.p`
   color: #392f31;
 `;
 const BackButton = ({ type }) => {
+    const history = useHistory();
+    const handleBackButtonClick = () => {
+        history.goBack();
+    }
   return (
-    <BackButtonWrapper to="/">
+    <BackButtonWrapper onClick={handleBackButtonClick}>
       <ButtonImageWrapper>
         <ButtonImage src={ImageSrc.BACK} alt="뒤로가기" />
       </ButtonImageWrapper>
