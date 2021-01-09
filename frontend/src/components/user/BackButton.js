@@ -18,6 +18,7 @@ const Text = styled.p`
   height: 1.2rem;
   color: #392f31;
 `;
+
 const BackButton = ({ type }) => {
   return (
     <BackButtonWrapper to="/">
