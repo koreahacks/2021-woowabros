@@ -38,11 +38,11 @@ const User = () => {
     },
   ]);
   const [captions, setCaptions] = useState({
-    battery: "Battery Capacity",
-    design: "Design",
-    useful: "Usefulness",
-    speed: "Speed",
-    weight: "Weight",
+    battery: "컴퓨터",
+    design: "화학",
+    useful: "물리",
+    speed: "경제",
+    weight: "경영",
   });
 
   const [userPost, setUserPost] = useState([

@@ -38,11 +38,11 @@ const Home = ({ history }) => {
     },
   ]);
   const [captions, setCaptions] = useState({
-    battery: "Battery Capacity",
-    design: "Design",
-    useful: "Usefulness",
-    speed: "Speed",
-    weight: "Weight",
+    battery: "컴퓨터",
+    design: "화학",
+    useful: "물리",
+    speed: "경제",
+    weight: "경영",
   });
 
   const [namedPostSummary, setNamedPostSummary] = useState([
@@ -89,7 +89,7 @@ const Home = ({ history }) => {
         }}
         functions={{ go }}
       />
-      <PostButtons functions={{ go }} />
+      {/*<PostButtons functions={{ go }} />*/}
       <PostSummary data={{ title: "실명 게시판", summary: namedPostSummary }} />
       <PostSummary
         data={{ title: "익명 게시판", summary: anonymousPostSummary }}

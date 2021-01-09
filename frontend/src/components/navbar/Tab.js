@@ -19,6 +19,12 @@ const TabWrapper = styled(NavLink)`
   &:active {
     text-decoration: none;
   }
+  
+  opacity: 0.4;
+  
+  &.active {
+    opacity: 1;
+  }
 `;
 
 const TabContent = styled.div`
@@ -36,6 +42,7 @@ const TabImg = styled.img`
 `;
 
 const TabName = styled.div`
+  margin-top: 0.25rem;
   font-size: 0.5rem;
   color: #000;
   text-align: center;
@@ -51,7 +58,7 @@ const Tab = ({ data, functions }) => {
   console.log(userId);
 
   return (
-    <TabWrapper to={data.url}>
+    <TabWrapper exact={data.url === "/"} to={data.url} activeClassName="active">
       <TabContent>
         <TabImg
           src={data.src}

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from "styled-components";
 
 const Badge = styled.p`
-  margin-left: 0.2rem;
-  padding: 0.25rem;
+  margin-left: 0.3rem;
+  padding: 0.1rem 0.25rem;
   border-radius: 5px;
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   font-weight: 100;
   background-color: #444;
   color: #ddd;

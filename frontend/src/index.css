@@ -10,13 +10,12 @@ html {
 
 * {
   font-size: 5vw;
-  font-family: BMJUA;
+  font-family: 'Spoqa Han Sans Neo';
 }
 body {
   width: 100%;
   height: 100%;
   margin: 0;
-  font-family: BMJUA;
 }
 #root {
   width: 100%;
@@ -26,21 +25,21 @@ body {
 /*placeholder font-family*/
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  font-family: BMJUA;
+  /*font-family: BMJUA;*/
   padding-left: 0.5rem;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
-  font-family: BMJUA;
+  /*font-family: BMJUA;*/
   padding-left: 0.5rem;
 }
 :-ms-input-placeholder {
   /* IE 10+ */
-  font-family: BMJUA;
+  /*font-family: BMJUA;*/
   padding-left: 0.5rem;
 }
 :-moz-placeholder {
   /* Firefox 18- */
-  font-family: BMJUA;
+  /*font-family: BMJUA;*/
   padding-left: 0.5rem;
 }

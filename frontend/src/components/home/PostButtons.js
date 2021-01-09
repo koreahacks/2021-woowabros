@@ -26,6 +26,7 @@ const Button = styled.div`
 `;
 
 const ButtonText = styled.div`
+  margin-top: 0.5rem;
   font-size: 0.75rem;
 `;
 
