@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 import koreahacks.woowabros.uniconn.member.domain.Member;
+import koreahacks.woowabros.uniconn.member.domain.University;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -31,8 +32,12 @@ public class MemberCreateRequest {
             .password(this.password)
             .major(this.major)
             .isVerified(false)
-            .authCode(UUID.randomUUID().toString().replaceAll("-","").substring(0, 20))
-            .univ(this.email)
+            .authCode(createAuthorizationCode())
+            .univ(University.valueOf(this.email).name())
             .build();
+    }
+
+    private String createAuthorizationCode() {
+        return UUID.randomUUID().toString().replaceAll("-","").substring(0, 20);
     }
 }

@@ -18,3 +18,8 @@ logging:
           search:
             slowlog:
               query: INFO
+secrets:
+  jwt:
+    token:
+      secret-key: secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret
+      expire-length: 2147483646
