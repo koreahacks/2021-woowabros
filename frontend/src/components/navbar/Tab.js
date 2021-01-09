@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { authState } from "../../store";
 
 const clickedColor = "#800000";
 const unclickedColor = "red";
@@ -16,6 +18,12 @@ const TabWrapper = styled(NavLink)`
   &:link,
   &:active {
     text-decoration: none;
+  }
+  
+  opacity: 0.4;
+  
+  &.active {
+    opacity: 1;
   }
 `;
 
@@ -34,14 +42,23 @@ const TabImg = styled.img`
 `;
 
 const TabName = styled.div`
+  margin-top: 0.25rem;
   font-size: 0.5rem;
   color: #000;
   text-align: center;
 `;
 
 const Tab = ({ data, functions }) => {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    setUserId(authState.userId);
+  }, [authState.userId]);
+
+  console.log(userId);
+
   return (
-    <TabWrapper to={data.url}>
+    <TabWrapper exact={data.url === "/"} to={data.url} activeClassName="active">
       <TabContent>
         <TabImg
           src={data.src}

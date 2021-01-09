@@ -12,6 +12,6 @@ export const SharedPurpleWrapper = styled.div`
   justify-content: center;
   background-color: #d8bfd8;
   border: 1px solid #aa8fbf;
-  border-radius: 0.5rem;
-  margin-top: 1.5rem;
+  border-radius: 2px;
+  margin-top: 0.3rem;
 `;

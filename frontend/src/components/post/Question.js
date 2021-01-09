@@ -5,8 +5,8 @@ import SelectedBadge from "./SelectedBadge";
 import UnselectedBadge from "./UnselectedBadge";
 const QuestionWrapper = styled.div`
   width: 100%;
-  height: 4rem;
-  border-bottom: solid 1px #707070;
+  padding: 0.25rem 0;
+  border-bottom: solid 1px #eee;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,22 +35,23 @@ const Title = styled.p`
 const Writer = styled.p`
   color: #392f31;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
 `;
 const UnderLine = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  height: 1rem;
-  padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+  padding: 0.25rem 0.5rem 0.25rem;
 `;
 const Price = styled.p`
-  font-size: 0.75rem;
+  font-size: 0.6rem;
+  margin: 0;
   color: #392f31;
 `;
 const Date = styled.p`
-  font-size: 0.75rem;
+  font-size: 0.5rem;
+  margin: 0;
   color: #392f31;
 `;
 const Question = ({

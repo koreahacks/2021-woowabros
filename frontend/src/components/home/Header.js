@@ -5,6 +5,7 @@ import IMAGE_SRC from "../../ImageSrc";
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-bottom: 1rem;
 `;
 
 const LogoImg = styled.img`
@@ -15,9 +16,10 @@ const LogoImg = styled.img`
 const HeaderMessage = styled.div`
   color: #aa8fbf;
   font-size: 1.5rem;
-  font-weight: 800;
+  // font-weight: 800;
   display: flex;
   align-items: center;
+  font-family: BMJUA;
 `;
 
 const Header = () => {

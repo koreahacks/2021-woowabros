@@ -1,13 +1,12 @@
 package koreahacks.woowabros.uniconn.member.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import koreahacks.woowabros.uniconn.exception.AlreadyVerifiedException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "members", createIndex = false, useServerConfiguration = true)
 @AllArgsConstructor

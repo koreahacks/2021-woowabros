@@ -6,22 +6,25 @@ const SearchWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.75rem;
+  width: 100%;
 `;
 const SearchBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: solid black 1px;
-  border-radius: 10px;
-  padding: 0 0.25rem;
-  width: 15rem;
-  height: 2rem;
+  border-bottom: solid #ddd 1px;
+  border-radius: 2px;
+  width: calc(100% - 1.75rem);
+  padding: 0.5rem 0.25rem;
+  margin: 0.5rem 0;
 `;
 const SearchInput = styled.input`
   font-size: 0.8rem;
   border: 0;
-  width: 12rem;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
 `;
 const SearchIcon = styled.div`
   width: 1rem;

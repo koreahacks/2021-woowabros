@@ -23,6 +23,7 @@ public class JwtAuthFilter implements WebFilter {
         EXCLUDED_PATH.add("/api/members/join");
         EXCLUDED_PATH.add("/api/members/login");
         EXCLUDED_PATH.add("/api/members/auth");
+        EXCLUDED_PATH.add("/api/members/");
     }
 
     @Override
@@ -44,7 +45,6 @@ public class JwtAuthFilter implements WebFilter {
                 String email = jwtTokenProvider.getSubject(authHeader.substring(7));
                 exchange.getAttributes().put("email", email);
             }
-
             return chain.filter(exchange);
         } catch (Exception e) {
             throw new IllegalArgumentException();

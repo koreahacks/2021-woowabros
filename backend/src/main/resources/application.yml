@@ -32,7 +32,6 @@ secrets:
       secret-key: secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret
       expire-length: 2147483646
 
-
 ---
 spring:
   config:

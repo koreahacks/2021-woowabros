@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -29,7 +30,7 @@ public class MemberCreateRequest {
     @Length(min = 1, max = 20)
     private String nickname;
 
-    @NotBlank
+    @NotNull
     private Major major;
 
     public Member toMember(AuthCodeGenerator generator) {
