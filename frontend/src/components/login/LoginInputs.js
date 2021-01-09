@@ -53,6 +53,7 @@ const LoginInputs = ({
   password,
   remember,
   handleRememberClick,
+  handleButtonClick,
 }) => {
   return (
     <>
@@ -81,7 +82,7 @@ const LoginInputs = ({
         <RememberText>로그인 상태 유지</RememberText>
       </RememberWrapper>
       <ButtonWrapper>
-        <Button color="#D2C4DD" textColor="#392F31" fontSize="1.5rem">
+        <Button onClick={handleButtonClick} color="#D2C4DD" textColor="#392F31" fontSize="1.5rem">
           로그인
         </Button>
       </ButtonWrapper>

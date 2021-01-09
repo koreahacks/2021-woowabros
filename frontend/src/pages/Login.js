@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Title from "../components/login/Title";
 import LoginInputs from "../components/login/LoginInputs";
 import ImageSrc from "../ImageSrc";
+import { loginTokenState } from "../store";
 
 const LoginContent = styled.div`
   width: 100%;
@@ -45,6 +48,13 @@ const Login = () => {
   const handleRememberClick = () => {
     setRemember(!remember);
   };
+  const [loginToken, setLoginToken] = useRecoilState(loginTokenState);
+  const history = useHistory();
+  const handleButtonClick = () => {
+    setLoginToken("안뇽");
+    localStorage.setItem("loginToken", loginToken);
+    history.push("/");
+  };
 
   return (
     <LoginContent>
@@ -59,6 +69,7 @@ const Login = () => {
           password={password}
           remember={remember}
           handleRememberClick={handleRememberClick}
+          handleButtonClick={handleButtonClick}
         />
       </LoginWrapper>
     </LoginContent>
