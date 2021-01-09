@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import koreahacks.woowabros.uniconn.common.AuthCodeGenerator;
 import koreahacks.woowabros.uniconn.common.TokenProvider;
-import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.dto.AccessToken;
@@ -105,8 +104,7 @@ public class MemberService {
             .addAggregation(AggregationBuilders.terms("my_agg").field("major"))
             .build();
 
-        return reactiveElasticsearchOperations.aggregate(query,
-            StatisticResponse.class,
+        return reactiveElasticsearchOperations.aggregate(query, StatisticResponse.class,
             IndexCoordinates.of("answers"))
             .next()
             .map(aggregation -> ((Terms)aggregation).getBuckets()
