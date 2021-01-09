@@ -1,7 +1,7 @@
 package koreahacks.woowabros.uniconn.question.presentation;
 
 import koreahacks.woowabros.uniconn.question.application.QuestionService;
-import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionCommentResponse;
+import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionCreateRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +23,8 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public Mono<QuestionCommentResponse> find(@PathVariable String id) {
-        return questionService.find(id);
+    public Mono<QuestionAnswerResponse> find(@PathVariable String id) {
+        return questionService.findBy(id);
     }
 
     @DeleteMapping("/{id}")
