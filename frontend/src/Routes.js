@@ -9,6 +9,7 @@ import PostPage from "./pages/Post";
 import QuestionPage from "./pages/Question";
 import RankingPage from "./pages/Ranking";
 import UserPostPage from "./pages/UserPost";
+import UploadPostPage from "./pages/UploadPost";
 import NavigationBar from "./components/navbar/NavigationBar";
 
 const routes = [
@@ -47,6 +48,12 @@ const routes = [
     page: PostPage,
     exact: true,
     name: "게시판",
+  },
+  {
+    path: "/upload/:type",
+    page: UploadPostPage,
+    exact: true,
+    name: "질문 올리기",
   },
   {
     path: "/posts/:type/:id",
