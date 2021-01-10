@@ -48,8 +48,8 @@ public class MemberController {
     }
 
     @GetMapping
-    public Mono<MemberResponse> retrieveSelf(@LoginMember Member member) {
-        return Mono.just(MemberResponse.of(member));
+    public Mono<MemberResponse> retrieveSelf(@LoginMember Mono<Member> member) {
+        return member.map(MemberResponse::of);
     }
 
     @GetMapping("/{id}")
@@ -58,12 +58,12 @@ public class MemberController {
     }
 
     @GetMapping("/info")
-    public Mono<MemberInfoResponse> retrieveInfoSelf(@LoginMember Member member) {
+    public Mono<MemberInfoResponse> retrieveInfoSelf(@LoginMember Mono<Member> member) {
         return memberService.findMemberInfo(member);
     }
 
     @DeleteMapping
-    public Mono<Void> delete(@LoginMember Member loginMember) {
+    public Mono<Void> delete(@LoginMember Mono<Member> loginMember) {
         return memberService.delete(loginMember);
     }
 

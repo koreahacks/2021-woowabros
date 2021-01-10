@@ -1,8 +1,5 @@
 package koreahacks.woowabros.uniconn.member.application;
 
-import java.util.stream.Collectors;
-
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,7 @@ import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
-import koreahacks.woowabros.uniconn.question.domain.Question;
 import koreahacks.woowabros.uniconn.question.domain.QuestionRepository;
-import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionResponse;
 import reactor.test.StepVerifier;
 
 @SpringBootTest
@@ -79,16 +74,9 @@ class MemberServiceTest {
 
     @Test
     void getMemberInfo() {
-        Member member = memberRepository.save(Member.builder().nickname("dd").build())
-            .block();
-        // questionRepository.saveAll(Lists.newArrayList(Question.builder().userId("dd").build(),
-        //     Question.builder().userId("dd").build(),
-        //     Question.builder().userId("dd").build())
-        // ).blockLast();
-        assert member != null;
-        MemberInfoResponse block = memberService.findMemberInfo(member).block();
+        MemberInfoResponse block = memberService.findMemberInfo(
+            memberRepository.save(Member.builder().nickname("dd").build())).block();
         assert block != null;
-        System.out.println(block.getId());
     }
 
     @Test

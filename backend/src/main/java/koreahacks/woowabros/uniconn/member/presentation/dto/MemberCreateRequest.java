@@ -1,9 +1,6 @@
 package koreahacks.woowabros.uniconn.member.presentation.dto;
 
-import java.util.UUID;
-
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;

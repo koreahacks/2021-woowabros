@@ -16,11 +16,11 @@ public class QuestionCreateRequest {
 
     public Question toEntity(String userId) {
         return Question.builder()
-                .title(title)
-                .content(content)
-                .price(price)
-                .category(category)
-                .userId(userId)
-                .build();
+            .title(title)
+            .content(content)
+            .price(price)
+            .category(category)
+            .userId(userId)
+            .build();
     }
 }

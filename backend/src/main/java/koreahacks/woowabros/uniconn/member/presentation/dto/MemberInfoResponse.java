@@ -6,7 +6,6 @@ import org.springframework.data.annotation.Id;
 
 import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
-import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionAnswerResponse;
 import koreahacks.woowabros.uniconn.question.presentation.dto.QuestionResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
