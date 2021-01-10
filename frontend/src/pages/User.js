@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Head from "../components/user/Head";
+import Head from "../util/sharedComponents/Head";
 import Chart from "../components/user/Chart";
 import PostSummary from "../components/user/PostSummary";
 import UserSummary from "../components/user/UserSummary";
@@ -79,7 +79,7 @@ const User = () => {
 
   return (
     <AppWrapper>
-      <Head />
+      <Head text="내 정보 보기" />
       <Chart
         data={{
           chart: { data: chartData, captions: captions },

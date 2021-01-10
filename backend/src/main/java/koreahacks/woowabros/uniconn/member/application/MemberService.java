@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -33,16 +34,23 @@ public class MemberService {
 
     public Mono<String> create(MemberCreateRequest request) {
         Member member = request.toMember(authCodeGenerator);
-        Mono<Member> save = memberRepository.save(member);
-        mailSender.sendAuthEmail(request.getEmail(), member.getAuthCode());
-
-        return save.map(Member::getId);
+        return memberRepository.findByEmail(request.getEmail())
+            .collectList()
+            .flatMap(members -> {
+                if (members.size()==0) {
+                    mailSender.sendAuthEmail(request.getEmail(), member.getAuthCode());
+                    return memberRepository.save(member);
+                }
+                return Mono.error(new IllegalArgumentException("중뵉된 이메일입니다"));
+            })
+            .map(Member::getId);
     }
 
-    public void authorize(String authCode) {
-        memberRepository.findFirstByAuthCode(authCode)
+    public Mono<String> authorize(String authCode) {
+        return memberRepository.findFirstByAuthCode(authCode)
                 .doOnNext(Member::verify)
-                .flatMap(memberRepository::save);
+                .flatMap(memberRepository::save)
+                .map(Member::getId);
     }
 
     public Mono<MemberInfoResponse> findDetailById(String id) {
