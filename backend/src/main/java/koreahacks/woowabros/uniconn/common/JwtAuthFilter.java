@@ -1,6 +1,7 @@
 package koreahacks.woowabros.uniconn.common;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -29,7 +30,7 @@ public class JwtAuthFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        if (isExcludedPath(request.getPath().toString())) {
+        if (request.getMethod() == HttpMethod.OPTIONS || isExcludedPath(request.getPath().toString())) {
             return chain.filter(exchange);
         }
 
