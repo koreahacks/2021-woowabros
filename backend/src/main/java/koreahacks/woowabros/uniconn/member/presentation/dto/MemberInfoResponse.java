@@ -36,7 +36,7 @@ public class MemberInfoResponse {
     private List<QuestionResponse> questionResponses;
 
     public static MemberInfoResponse of(Member member, List<QuestionResponse> questionResponses) {
-        return new MemberInfoResponse().builder()
+        return MemberInfoResponse.builder()
             .id(member.getId())
             .email(member.getEmail())
             .password(member.getPassword())
