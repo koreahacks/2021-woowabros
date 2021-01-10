@@ -16,13 +16,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({AlreadySelectedException.class, AlreadyVerifiedException.class, IllegalArgumentException.class})
     public Mono<ResponseEntity<String>> handleDefault(RuntimeException e) {
-        log.info("머지 ? ",e);
         return Mono.just(ResponseEntity.badRequest().body(e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
     public Mono<ResponseEntity<String>> handleUnknown(Exception e) {
-        log.info("머지 ? ",e);
         return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage()));
     }
 }
