@@ -10,6 +10,7 @@ import QuestionPage from "./pages/Question";
 import RankingPage from "./pages/Ranking";
 import UserPostPage from "./pages/UserPost";
 import NavigationBar from "./components/navbar/NavigationBar";
+import { login, retrieveInfoSelf } from "./api";
 
 const routes = [
   {
@@ -65,6 +66,7 @@ const routes = [
 const SwitchRoutes = () => {
   const location = useLocation();
   const loginToken = localStorage.getItem("loginToken");
+  console.log(loginToken);
   return (
     <>
       <Switch>
@@ -74,7 +76,13 @@ const SwitchRoutes = () => {
         <Route component={NavigationBar} />
       </Switch>
       {location.pathname !== "/sign-in" && <NavigationBar />}
-      {loginToken === "" ? <Redirect to="/sign-in" /> : <></>}
+      {/*{loginToken == null || loginToken === "" ? (*/}
+      {/*  <Redirect to="/sign-in" />*/}
+      {/*) : (*/}
+      {/*  retrieveInfoSelf().then((response) =>*/}
+      {/*    response.data.isVerified ? <div>인증이 안됐어요</div> : <></>*/}
+      {/*  )*/}
+      {/*)}*/}
     </>
   );
 };

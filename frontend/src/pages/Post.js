@@ -1,95 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Question from "../components/post/Question";
 import Head from "../components/post/Head";
 import Search from "../components/post/Search";
-import {AppWrapper} from "../util/SharedStyles";
+import { AppWrapper } from "../util/SharedStyles";
+import { findAllQuestions } from "../api";
 
 const PostWrapper = styled(AppWrapper)`
-display: flex;
-flex-direction: column;
-align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const QuestionWrapper = styled.div`
   width: calc(100% - 1rem);
 `;
 const Post = ({ match }) => {
   const { type } = match.params;
-  const question = {
-    questions: [
-      {
-        id: "1",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: null,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-      {
-        id: "2",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: 7,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-      {
-        id: "3",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: null,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-      {
-        id: "4",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: null,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-      {
-        id: "5",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: null,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-      {
-        id: "6",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: null,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-      {
-        id: "7",
-        title: "안뇽하세요",
-        price: 30000,
-        selected: null,
-        createdAt: "2020-01-01",
-        createdBy: {
-          name: "꿀벌",
-        },
-      },
-    ],
+  const [question, setQuestion] = useState([]);
+  const onLoadQuestions = async () => {
+    const response = await findAllQuestions();
+    const questions = response.data;
+    setQuestion(questions);
   };
+  useEffect(() => onLoadQuestions(), []);
+  // const question = {
+  //   questions: [
+  //     {
+  //       id: "1",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: null,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //     {
+  //       id: "2",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: 7,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //     {
+  //       id: "3",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: null,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //     {
+  //       id: "4",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: null,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //     {
+  //       id: "5",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: null,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //     {
+  //       id: "6",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: null,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //     {
+  //       id: "7",
+  //       title: "안뇽하세요",
+  //       price: 30000,
+  //       selected: null,
+  //       createdAt: "2020-01-01",
+  //       createdBy: {
+  //         name: "꿀벌",
+  //       },
+  //     },
+  //   ],
+  // };
 
   const [search, setSearch] = useState("");
   const handleSearchChange = (event) => {

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Title from "../components/login/Title";
 import LoginInputs from "../components/login/LoginInputs";
 import ImageSrc from "../ImageSrc";
-import { authState } from "../store";
 import UserHelp from "../components/login/UserHelp";
+import { login } from "../api";
+import { authState } from "../store/index";
 
 const LoginContent = styled.div`
   width: 100%;
@@ -51,19 +52,28 @@ const Login = () => {
     setRemember(!remember);
   };
 
-  const setAuth = useSetRecoilState(authState);
+  const [auth, setAuth] = useRecoilState(authState);
   const history = useHistory();
-  const handleButtonClick = () => {
-    // TODO: link with api
-    setAuth({ loginToken: "hiImGroot", userId: 1 });
-    localStorage.setItem("loginToken", "loginToken");
-    if (remember) {
-      localStorage.setItem("email", email);
-    }
-    if (!remember) {
-      localStorage.setItem("email", "");
-    }
-    history.push("/");
+  const handleButtonClick = async () => {
+    const loginRequest = {
+      email,
+      password,
+    };
+    login(loginRequest)
+      .then((response) => {
+        setAuth({ ...auth, loginToken: response.data.accessToken });
+        localStorage.setItem("loginToken", auth.loginToken);
+        if (remember) {
+          localStorage.setItem("email", email);
+        }
+        if (!remember) {
+          localStorage.setItem("email", "");
+        }
+        history.push("/");
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   };
 
   return (
