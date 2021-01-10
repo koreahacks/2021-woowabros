@@ -48,6 +48,7 @@ class MemberControllerTest {
                 .expectBody().consumeWith(body -> assertThat(body).isNotNull());
     }
 
+
     @DisplayName("로그인")
     @Test
     void login() {
