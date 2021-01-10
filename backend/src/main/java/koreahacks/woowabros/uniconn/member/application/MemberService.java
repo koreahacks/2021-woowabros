@@ -81,12 +81,13 @@ public class MemberService {
     }
 
     public Mono<MemberInfoResponse> findMemberInfo(Member member) {
-        return memberRepository.findById(member.getId())
-                .flatMap(member1 ->
-                        questionRepository.findAllByUserId(member.getId())
-                                .collectList()
-                                .map(questions -> MemberInfoResponse.of(member1,
-                                        QuestionResponse.listOf(questions))));
+        Mono<MemberInfoResponse> memberInfoResponseMono = memberRepository.findById(member.getId())
+            .flatMap(member1 ->
+                questionRepository.findAllByUserId(member.getId())
+                    .collectList()
+                    .map(questions -> MemberInfoResponse.of(member1,
+                        QuestionResponse.listOf(questions))));
+        return memberInfoResponseMono;
     }
 
     public Mono<Void> delete(Member loginMember) {
