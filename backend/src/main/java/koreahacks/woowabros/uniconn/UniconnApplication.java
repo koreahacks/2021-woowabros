@@ -10,8 +10,8 @@ import org.springframework.data.elasticsearch.repository.config.EnableReactiveEl
 @SpringBootApplication
 public class UniconnApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(UniconnApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(UniconnApplication.class, args);
+    }
 
 }

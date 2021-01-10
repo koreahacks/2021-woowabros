@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.data.annotation.Id;
-
 import koreahacks.woowabros.uniconn.question.domain.Question;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

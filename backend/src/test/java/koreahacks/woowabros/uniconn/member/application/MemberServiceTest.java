@@ -10,6 +10,8 @@ import koreahacks.woowabros.uniconn.member.domain.Major;
 import koreahacks.woowabros.uniconn.member.domain.Member;
 import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
+import koreahacks.woowabros.uniconn.member.presentation.dto.MemberInfoResponse;
+import koreahacks.woowabros.uniconn.question.domain.QuestionRepository;
 import reactor.test.StepVerifier;
 
 @SpringBootTest
@@ -17,6 +19,9 @@ class MemberServiceTest {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -65,6 +70,13 @@ class MemberServiceTest {
             .expectNext(true)
             .verifyComplete();
 
+    }
+
+    @Test
+    void getMemberInfo() {
+        MemberInfoResponse block = memberService.findMemberInfo(
+            memberRepository.save(Member.builder().nickname("dd").build())).block();
+        assert block != null;
     }
 
     @Test

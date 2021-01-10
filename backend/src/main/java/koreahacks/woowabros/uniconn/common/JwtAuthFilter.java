@@ -1,36 +1,38 @@
 package koreahacks.woowabros.uniconn.common;
 
-import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
-import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter implements WebFilter {
 
     public static final List<String> EXCLUDED_PATH;
-    private final JwtTokenProvider jwtTokenProvider;
 
     static {
         EXCLUDED_PATH = new ArrayList<>();
         EXCLUDED_PATH.add("/api/members/join");
         EXCLUDED_PATH.add("/api/members/login");
         EXCLUDED_PATH.add("/api/members/auth");
-        EXCLUDED_PATH.add("/api/members/");
     }
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        if (request.getMethod() == HttpMethod.OPTIONS || isExcludedPath(request.getPath().toString())) {
+        if (request.getMethod() == HttpMethod.OPTIONS || isExcludedPath(
+            request.getPath().toString())) {
             return chain.filter(exchange);
         }
 
@@ -53,6 +55,7 @@ public class JwtAuthFilter implements WebFilter {
     }
 
     public boolean isExcludedPath(String path) {
-        return EXCLUDED_PATH.stream().anyMatch(path::contains) || path.equals("/") || path.equals("/index");
+        return EXCLUDED_PATH.stream().anyMatch(path::contains) || path.equals("/") || path.equals(
+            "/index");
     }
 }

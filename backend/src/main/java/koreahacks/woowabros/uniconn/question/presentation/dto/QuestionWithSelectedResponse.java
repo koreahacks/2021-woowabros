@@ -1,10 +1,10 @@
 package koreahacks.woowabros.uniconn.question.presentation.dto;
 
+import java.util.Date;
+
 import koreahacks.woowabros.uniconn.question.domain.Question;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 @Builder
@@ -24,12 +24,12 @@ public class QuestionWithSelectedResponse {
 
     public static QuestionWithSelectedResponse from(Question question, boolean isSelected) {
         return QuestionWithSelectedResponse.builder()
-                .id(question.getId())
-                .title(question.getTitle())
-                .content(question.getContent())
-                .price(question.getPrice())
-                .isSelected(isSelected)
-                .createdAt(question.getCreatedAt())
-                .build();
+            .id(question.getId())
+            .title(question.getTitle())
+            .content(question.getContent())
+            .price(question.getPrice())
+            .isSelected(isSelected)
+            .createdAt(question.getCreatedAt())
+            .build();
     }
 }

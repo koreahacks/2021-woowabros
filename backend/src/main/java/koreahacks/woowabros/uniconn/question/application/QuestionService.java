@@ -61,8 +61,7 @@ public class QuestionService {
     public Flux<QuestionResponse> search(String query) {
         NativeSearchQuery buildQuery = new NativeSearchQueryBuilder()
             .withQuery(QueryBuilders.boolQuery()
-                .must(QueryBuilders.multiMatchQuery(query, "content", "title"))).build()
-            ;
+                .must(QueryBuilders.multiMatchQuery(query, "content", "title"))).build();
 
         return reactiveElasticsearchOperations.search(buildQuery, QuestionResponse.class,
             IndexCoordinates.of("questions", "answers"))

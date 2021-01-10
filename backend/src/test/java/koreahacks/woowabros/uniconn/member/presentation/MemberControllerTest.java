@@ -5,6 +5,7 @@ import koreahacks.woowabros.uniconn.member.domain.MemberRepository;
 import koreahacks.woowabros.uniconn.member.presentation.dto.LoginRequest;
 import koreahacks.woowabros.uniconn.member.presentation.dto.MemberCreateRequest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ class MemberControllerTest {
     }
 
     @DisplayName("회원 가입")
+    @Disabled
     @Test
     void create() {
         MemberCreateRequest request = new MemberCreateRequest("abc@korea.ac.kr", "12345678", "dd",

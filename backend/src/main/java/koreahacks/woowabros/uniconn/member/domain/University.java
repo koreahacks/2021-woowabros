@@ -213,8 +213,8 @@ public enum University {
 
     public static University from(String email) {
         return Arrays.stream(University.values())
-                .filter(university -> email.endsWith(university.email))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 대학을 찾을 수 없습니다."));
+            .filter(university -> email.endsWith(university.email))
+            .findAny()
+            .orElseThrow(() -> new IllegalArgumentException("해당하는 대학을 찾을 수 없습니다."));
     }
 }

@@ -1,18 +1,23 @@
 package koreahacks.woowabros.uniconn.answer.domain;
 
-import koreahacks.woowabros.uniconn.exception.AlreadySelectedException;
-import koreahacks.woowabros.uniconn.member.domain.Major;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.util.*;
+import koreahacks.woowabros.uniconn.exception.AlreadySelectedException;
+import koreahacks.woowabros.uniconn.member.domain.Major;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Document(indexName = "answers", createIndex = false, useServerConfiguration = true)
 @AllArgsConstructor
@@ -44,8 +49,8 @@ public class Answer {
 
     public void addReaction(ReactionType type, String userId) {
         Optional<Reaction> existedReaction = reactions.stream()
-                .filter(it -> Objects.equals(it.getUserId(), userId))
-                .findFirst();
+            .filter(it -> Objects.equals(it.getUserId(), userId))
+            .findFirst();
 
         if (existedReaction.isPresent()) {
             Reaction reaction = existedReaction.get();
@@ -65,8 +70,8 @@ public class Answer {
 
     private long count(ReactionType type) {
         return reactions.stream()
-                .filter(it -> it.getType() == type)
-                .count();
+            .filter(it -> it.getType() == type)
+            .count();
     }
 
     public void verifyNotSelected() {

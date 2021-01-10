@@ -1,11 +1,11 @@
 package koreahacks.woowabros.uniconn.answer.presentation.dto;
 
+import java.util.Date;
+
 import koreahacks.woowabros.uniconn.answer.domain.Answer;
 import koreahacks.woowabros.uniconn.member.domain.Major;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 @Builder
@@ -29,14 +29,14 @@ public class AnswerResponse {
 
     public static AnswerResponse of(Answer answer) {
         return AnswerResponse.builder()
-                .id(answer.getId())
-                .content(answer.getContent())
-                .major(answer.getMajor())
-                .isSelected(answer.isSelected())
-                .likeCount(answer.countLike())
-                .dislikeCount(answer.countDislike())
-                .createdAt(answer.getCreatedAt())
-                .createdBy(answer.getUserId())
-                .build();
+            .id(answer.getId())
+            .content(answer.getContent())
+            .major(answer.getMajor())
+            .isSelected(answer.isSelected())
+            .likeCount(answer.countLike())
+            .dislikeCount(answer.countDislike())
+            .createdAt(answer.getCreatedAt())
+            .createdBy(answer.getUserId())
+            .build();
     }
 }
